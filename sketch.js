@@ -1,45 +1,75 @@
-let fallimg = [];
-let posimg = [];
+//-----------------------------------INITIAL ANIMATION----------------------------
 
-let fallshape = [];
-let posshape = [];
+let fallimg = [];
+let posximg = [];
+let posyimg = [];
+let velimgy = [];
+let imgsize = [];
+let imgangle = [];
 
 let nimg;
-let nshape;
 
-let timg;
-let tshape;
+let imgtype = 6;
+
+let timg = [];
 
 let cnv1;
 
 let rain = function (r) {
   r.preload = function () {
-    //this is a preload (idk why but if you create multiple instances of p5 it invert the preload and the setup)
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i <= imgtype; i++) {
       fallimg[i] = r.loadImage("Assets/Photos/i" + i + ".png");
-      console.log(i);
-    }
-
-    for (let i = 0; i < 1; i++) {
-      fallshape[i] = r.loadImage("Assets/Photos/s" + i + ".png");
     }
   };
 
   r.setup = function () {
-    //this is the setup
     cnv1 = r.createCanvas(r.windowWidth, r.windowHeight);
-    nimg = r.round(r.random(0, 15));
-    nshape = r.round(r.random(0, 15));
+    cnv1.parent("rainingmen");
 
-    for (let i = 0; i < nimg; i += 2) {
-      timg = r.round(r.random(0, fallimg.lenght));
-      posimg[i] = r.random(0, r.width);
-      posimg[i + 1] = 50;
-      r.image(fallimg[timg], posimg[i], posimg[i + 1], 100, 100);
+    nimg = r.round(r.random(10, 15));
+    r.angleMode(r.DEGREES);
+
+    for (let i = 0; i < nimg; i++) {
+      timg[i] = r.round(r.random(0, imgtype));
+      posximg[i] = r.random(0, r.width);
+      posyimg[i] = r.random(0, -r.height);
+      velimgy[i] = r.random(1, 5);
+      imgsize[i] = r.random(100, 200);
+      imgangle[i] = r.random(0, 360);
     }
   };
 
-  r.draw = function () {};
+  r.draw = function () {
+    r.background("#1e1e1e");
+
+    for (let i = 0; i < nimg; i++) {
+      r.push();
+      r.translate(posximg[i], posyimg[i]);
+      r.rotate(imgangle[i]);
+
+      r.image(fallimg[timg[i]], 0, 0, imgsize[i], imgsize[i]);
+      posyimg[i] += velimgy[i];
+
+      if (posyimg[i] > r.height + 200) {
+        posyimg[i] = r.random(0, -r.height);
+        posximg[i] = r.random(0, r.width);
+        imgsize[i] = r.random(100, 200);
+        velimgy[i] = r.random(1, 5);
+        imgangle[i] = r.random(0, 360);
+      }
+      r.pop();
+    }
+  };
+
+  r.windowResized = function () {
+    r.resizeCanvas(r.windowWidth, r.windowHeight);
+  };
 };
 
 let rainingobjects = new p5(rain);
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//-----------------------------------INITIAL ANIMATION----------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
