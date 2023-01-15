@@ -2,33 +2,9 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #1e1e1e;
 }
 
 canvas {
   display: block;
-}
-
-#logohome {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 30%;
-  height: 20vh;
-}
-
-#rainingmen {
-  position: absolute;
-  z-index: -1;
-  user-select: none;
-}
-
-#start {
-  position: absolute;
-  transform: rotate(-10deg) translate(-50%, -50%);
-
-  top: 50%;
-  left: 50%;
-  height: 10vh;
-  width: 33vw;
-  background-color: aqua;
 }
