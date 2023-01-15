@@ -7,7 +7,7 @@ let imgangle = [];
 
 let nimg;
 
-let imgtype = 16;
+let imgtype = 5;
 
 let timg = [];
 
@@ -15,7 +15,7 @@ let cnv1;
 
 function preload() {
   for (let i = 0; i <= imgtype; i++) {
-    fallimg[i] = loadImage("Assets/Photos/i" + i + ".png");
+    fallimg[i] = loadImage("Assets/Graphics/Emoji" + i + ".png");
   }
 }
 
@@ -30,7 +30,7 @@ function setup() {
     posximg[i] = random(0, width);
     posyimg[i] = random(0, -height);
     velimgy[i] = random(1, 5);
-    imgsize[i] = random(100, 200);
+    imgsize[i] = 100;
     imgangle[i] = random(0, 360);
   }
 }
