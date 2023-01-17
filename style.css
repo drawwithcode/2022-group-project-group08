@@ -1,8 +1,19 @@
+@font-face {
+  font-family: Akira;
+  src: url("./Assets/Fonts/Akira Expanded Demo.otf");
+}
+
+@font-face {
+  font-family: Graphik;
+  src: url("./Assets/Fonts/GraphikMedium.otf");
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   background-color: #1e1e1e;
+  font-family: Akira;
 }
 
 canvas {
