@@ -1,20 +1,21 @@
-let changer = 5;
+let changer = 0;
 let logo;
 let facerec;
 let preso = false;
 let avanti;
+let message = false;
 
 let webcam;
 let faceapi;
 let faceapi2;
 let detection = [];
 let faceOptions;
-let maxHappy = [0, 0, 0, 0, 0];
-let maxSad = [0, 0, 0, 0, 0];
-let maxAngry = [0, 0, 0, 0, 0];
-let maxDisgusted = [0, 0, 0, 0, 0];
-let maxNeutral = [0, 0, 0, 0, 0];
-let maxSurprised = [0, 0, 0, 0, 0];
+let maxHappy = [0, 0, 0, 0, 0, 0];
+let maxSad = [0, 0, 0, 0, 0, 0];
+let maxAngry = [0, 0, 0, 0, 0, 0];
+let maxDisgusted = [0, 0, 0, 0, 0, 0];
+let maxNeutral = [0, 0, 0, 0, 0, 0];
+let maxSurprised = [0, 0, 0, 0, 0, 0];
 let faceHappy = [];
 let faceSad = [];
 let faceAngry = [];
@@ -23,6 +24,7 @@ let faceNeutral = [];
 let faceSurprised = [];
 let yourFace;
 let emotion = [];
+let percentage = [];
 
 let fallimg = [];
 let posximg = [];
@@ -131,6 +133,12 @@ let surpriseShape;
 let content;
 let artpage = 0;
 let data;
+let contentimages = [];
+let emoji = [];
+let randposx = [];
+let randposy = [];
+let randvel = [];
+let tempo;
 
 function preload() {
   //------------------------------------------FONT----------------------------------------------------
@@ -182,12 +190,23 @@ function preload() {
   surpriseShape = shapeXr;
 
   data = loadJSON("possibilities.json");
+
+  for (let i = 0; i < 28; i++) {
+    contentimages[i] = loadImage("Assets/Photos/" + i + ".png");
+  }
+
+  for (let i = 0; i < 6; i++) {
+    emoji[i] = loadImage("Assets/Graphics/Emoji" + i + ".png");
+  }
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //const canvas.getContext("2d", { willReadFrequently: true });
   logo = select("#logo");
+  alert(
+    "Hey, to better enjoy this site we suggest to be alone in a quiet place with your earphones on, Have fun!"
+  );
 
   //------------------------------------------FACE API----------------------------------------------------
 
@@ -240,11 +259,11 @@ function setup() {
 
   //------------------------------------------CONTENTS PAGES----------------------------------------------------
 
-  for (let i = 0; i < 6; i++) {
-    vidrand[i] = round(random(1, 25));
+  for (let i = 0; i < 5; i++) {
+    vidrand[i] = round(random(0, 24));
   }
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     contents[vidrand[i]] = createVideo([
       "Assets/Contents/video" + vidrand[i] + ".mp4",
     ]);
@@ -267,6 +286,14 @@ function setup() {
   for (let i = 0; i <= 6; i++) {
     randCol[i] = random(myColors.length - 1);
     randCol[i] = round(randCol[i]);
+  }
+
+  //------------------------------------------ARTWORK----------------------------------------------------
+
+  for (let i = 0; i < 20; i++) {
+    randposx[i] = random(width);
+    randposy[i] = random(-height, 0);
+    randvel[i] = random(1, 6);
   }
 }
 
@@ -639,52 +666,52 @@ function draw() {
       avanti.hide();
 
       if (
-        contents[vidrand[1]].time() >
-        contents[vidrand[1]].duration() - 0.01
+        contents[vidrand[0]].time() >
+        contents[vidrand[0]].duration() - 0.01
       ) {
         mode = 1;
       }
       if (
-        contents[vidrand[1]].time() + contents[vidrand[2]].time() >
-        contents[vidrand[1]].duration() + contents[vidrand[2]].duration() - 0.01
+        contents[vidrand[0]].time() + contents[vidrand[1]].time() >
+        contents[vidrand[0]].duration() + contents[vidrand[1]].duration() - 0.01
       ) {
         mode = 2;
       }
       if (
-        contents[vidrand[1]].time() +
-          contents[vidrand[2]].time() +
-          contents[vidrand[3]].time() >
-        contents[vidrand[1]].duration() +
-          contents[vidrand[2]].duration() +
-          contents[vidrand[3]].duration() -
+        contents[vidrand[0]].time() +
+          contents[vidrand[1]].time() +
+          contents[vidrand[2]].time() >
+        contents[vidrand[0]].duration() +
+          contents[vidrand[1]].duration() +
+          contents[vidrand[2]].duration() -
           0.01
       ) {
         mode = 3;
       }
       if (
-        contents[vidrand[1]].time() +
+        contents[vidrand[0]].time() +
+          contents[vidrand[1]].time() +
           contents[vidrand[2]].time() +
-          contents[vidrand[3]].time() +
-          contents[vidrand[4]].time() >
-        contents[vidrand[1]].duration() +
+          contents[vidrand[3]].time() >
+        contents[vidrand[0]].duration() +
+          contents[vidrand[1]].duration() +
           contents[vidrand[2]].duration() +
-          contents[vidrand[3]].duration() +
-          contents[vidrand[4]].duration() -
+          contents[vidrand[3]].duration() -
           0.01
       ) {
         mode = 4;
       }
       if (
-        contents[vidrand[1]].time() +
+        contents[vidrand[0]].time() +
+          contents[vidrand[1]].time() +
           contents[vidrand[2]].time() +
           contents[vidrand[3]].time() +
-          contents[vidrand[4]].time() +
-          contents[vidrand[5]].time() >
-        contents[vidrand[1]].duration() +
+          contents[vidrand[4]].time() >
+        contents[vidrand[0]].duration() +
+          contents[vidrand[1]].duration() +
           contents[vidrand[2]].duration() +
           contents[vidrand[3]].duration() +
-          contents[vidrand[4]].duration() +
-          contents[vidrand[5]].duration() -
+          contents[vidrand[4]].duration() -
           0.01
       ) {
         console.log(emotion);
@@ -748,6 +775,7 @@ function draw() {
                 maxAngry[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "angry";
+                percentage[mode] = maxAngry[mode];
               }
 
               if (
@@ -757,6 +785,7 @@ function draw() {
                 maxDisgusted[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "disgusted";
+                percentage[mode] = maxDisgusted[mode];
               }
 
               if (
@@ -766,6 +795,7 @@ function draw() {
                 maxHappy[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "happy";
+                percentage[mode] = maxHappy[mode];
               }
 
               if (
@@ -775,6 +805,7 @@ function draw() {
                 maxSad[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "sad";
+                percentage[mode] = maxSad[mode];
               }
 
               if (
@@ -784,9 +815,11 @@ function draw() {
                 maxSurprised[mode] > maxSad[mode]
               ) {
                 emotion[mode] = "surprised";
+                percentage[mode] = maxSurprised[mode];
               }
             } else {
               emotion[mode] = "neutral";
+              percentage[mode] = maxNeutral[mode];
             }
           }
 
@@ -796,10 +829,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(25);
+          textSize(40);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(18);
+          textSize(40);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -831,24 +864,24 @@ function draw() {
           );
 
           if (playing1 == false) {
+            contents[vidrand[1]].play();
             contents[vidrand[2]].play();
             contents[vidrand[3]].play();
             contents[vidrand[4]].play();
-            contents[vidrand[5]].play();
+            contents[vidrand[1]].pause();
             contents[vidrand[2]].pause();
             contents[vidrand[3]].pause();
             contents[vidrand[4]].pause();
-            contents[vidrand[5]].pause();
             playing1 = true;
           }
-          contents[vidrand[1]].play();
+          contents[vidrand[0]].play();
           if (mouseIsPressed == true) {
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 0; i < 5; i++) {
               contents[vidrand[i]].volume(1);
             }
           }
 
-          let img1 = contents[vidrand[1]].get();
+          let img1 = contents[vidrand[0]].get();
           image(img1, windowWidth / 2, windowHeight / 2);
           break;
 
@@ -908,6 +941,7 @@ function draw() {
                 maxAngry[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "angry";
+                percentage[mode] = maxAngry[mode];
               }
 
               if (
@@ -917,6 +951,7 @@ function draw() {
                 maxDisgusted[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "disgusted";
+                percentage[mode] = maxDisgusted[mode];
               }
 
               if (
@@ -926,6 +961,7 @@ function draw() {
                 maxHappy[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "happy";
+                percentage[mode] = maxHappy[mode];
               }
 
               if (
@@ -935,6 +971,7 @@ function draw() {
                 maxSad[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "sad";
+                percentage[mode] = maxSad[mode];
               }
 
               if (
@@ -944,9 +981,11 @@ function draw() {
                 maxSurprised[mode] > maxSad[mode]
               ) {
                 emotion[mode] = "surprised";
+                percentage[mode] = maxSurprised[mode];
               }
             } else {
               emotion[mode] = "neutral";
+              percentage[mode] = maxNeutral[mode];
             }
           }
 
@@ -956,10 +995,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(25);
+          textSize(40);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(18);
+          textSize(40);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -991,13 +1030,13 @@ function draw() {
           );
 
           if (playing2 == false) {
-            contents[vidrand[1]].volume(0);
-            contents[vidrand[2]].play();
+            contents[vidrand[0]].volume(0);
+            contents[vidrand[1]].play();
 
             playing2 = true;
           }
 
-          let img2 = contents[vidrand[2]].get();
+          let img2 = contents[vidrand[1]].get();
           image(img2, windowWidth / 2, windowHeight / 2);
           break;
 
@@ -1057,6 +1096,7 @@ function draw() {
                 maxAngry[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "angry";
+                percentage[mode] = maxAngry[mode];
               }
 
               if (
@@ -1066,6 +1106,7 @@ function draw() {
                 maxDisgusted[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "disgusted";
+                percentage[mode] = maxDisgusted[mode];
               }
 
               if (
@@ -1075,6 +1116,7 @@ function draw() {
                 maxHappy[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "happy";
+                percentage[mode] = maxHappy[mode];
               }
 
               if (
@@ -1084,6 +1126,7 @@ function draw() {
                 maxSad[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "sad";
+                percentage[mode] = maxSad[mode];
               }
 
               if (
@@ -1093,9 +1136,11 @@ function draw() {
                 maxSurprised[mode] > maxSad[mode]
               ) {
                 emotion[mode] = "surprised";
+                percentage[mode] = maxSurprised[mode];
               }
             } else {
               emotion[mode] = "neutral";
+              percentage[mode] = maxSurprised[mode];
             }
           }
 
@@ -1105,10 +1150,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(25);
+          textSize(40);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(18);
+          textSize(40);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1140,12 +1185,12 @@ function draw() {
           );
 
           if (playing3 == false) {
-            contents[vidrand[2]].volume(0);
-            contents[vidrand[3]].play();
+            contents[vidrand[1]].volume(0);
+            contents[vidrand[2]].play();
             playing3 = true;
           }
 
-          let img3 = contents[vidrand[3]].get();
+          let img3 = contents[vidrand[2]].get();
           image(img3, windowWidth / 2, windowHeight / 2);
           break;
 
@@ -1205,6 +1250,7 @@ function draw() {
                 maxAngry[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "angry";
+                percentage[mode] = maxAngry[mode];
               }
 
               if (
@@ -1214,6 +1260,7 @@ function draw() {
                 maxDisgusted[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "disgusted";
+                percentage[mode] = maxDisgusted[mode];
               }
 
               if (
@@ -1223,6 +1270,7 @@ function draw() {
                 maxHappy[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "happy";
+                percentage[mode] = maxHappy[mode];
               }
 
               if (
@@ -1232,6 +1280,7 @@ function draw() {
                 maxSad[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "sad";
+                percentage[mode] = maxSad[mode];
               }
 
               if (
@@ -1241,9 +1290,11 @@ function draw() {
                 maxSurprised[mode] > maxSad[mode]
               ) {
                 emotion[mode] = "surprised";
+                percentage[mode] = maxSurprised[mode];
               }
             } else {
               emotion[mode] = "neutral";
+              percentage[mode] = maxNeutral[mode];
             }
           }
 
@@ -1253,10 +1304,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(25);
+          textSize(40);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(18);
+          textSize(40);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1288,12 +1339,12 @@ function draw() {
           );
 
           if (playing4 == false) {
-            contents[vidrand[3]].volume(0);
-            contents[vidrand[4]].play();
+            contents[vidrand[2]].volume(0);
+            contents[vidrand[3]].play();
             playing4 = true;
           }
 
-          let img4 = contents[vidrand[4]].get();
+          let img4 = contents[vidrand[3]].get();
           image(img4, windowWidth / 2, windowHeight / 2);
           break;
 
@@ -1353,6 +1404,7 @@ function draw() {
                 maxAngry[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "angry";
+                percentage[mode] = maxAngry[mode];
               }
 
               if (
@@ -1362,6 +1414,7 @@ function draw() {
                 maxDisgusted[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "disgusted";
+                percentage[mode] = maxDisgusted[mode];
               }
 
               if (
@@ -1371,6 +1424,7 @@ function draw() {
                 maxHappy[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "happy";
+                percentage[mode] = maxHappy[mode];
               }
 
               if (
@@ -1380,6 +1434,7 @@ function draw() {
                 maxSad[mode] > maxSurprised[mode]
               ) {
                 emotion[mode] = "sad";
+                percentage[mode] = maxSad[mode];
               }
 
               if (
@@ -1389,9 +1444,11 @@ function draw() {
                 maxSurprised[mode] > maxSad[mode]
               ) {
                 emotion[mode] = "surprised";
+                percentage[mode] = maxSurprised[mode];
               }
             } else {
               emotion[mode] = "neutral";
+              percentage[mode] = maxNeutral[mode];
             }
           }
 
@@ -1401,10 +1458,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(25);
+          textSize(40);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(18);
+          textSize(40);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1436,30 +1493,30 @@ function draw() {
           );
 
           if (playing5 == false) {
-            contents[vidrand[4]].volume(0);
-            contents[vidrand[5]].play();
+            contents[vidrand[3]].volume(0);
+            contents[vidrand[4]].play();
             playing5 = true;
           }
 
-          let img5 = contents[vidrand[5]].get();
+          let img5 = contents[vidrand[4]].get();
           image(img5, windowWidth / 2, windowHeight / 2);
           break;
         default:
       }
 
       totaltime =
+        contents[vidrand[0]].duration() +
         contents[vidrand[1]].duration() +
         contents[vidrand[2]].duration() +
         contents[vidrand[3]].duration() +
-        contents[vidrand[4]].duration() +
-        contents[vidrand[5]].duration();
+        contents[vidrand[4]].duration();
 
       let currenttime =
+        contents[vidrand[0]].time() +
         contents[vidrand[1]].time() +
         contents[vidrand[2]].time() +
         contents[vidrand[3]].time() +
-        contents[vidrand[4]].time() +
-        contents[vidrand[5]].time();
+        contents[vidrand[4]].time();
 
       let barlenght = map(currenttime, 0, totaltime, 0, (3 * windowWidth) / 5);
 
@@ -1641,33 +1698,3762 @@ function draw() {
         (windowWidth / pupil.width) * 30
       );
       pop();
+      content = 0;
+      artpage = 0;
+      tempo = second();
       break;
 
     case 5:
       clear();
+      avanti.hide();
       imageMode(CENTER);
       textAlign(CENTER, CENTER);
-      textFont(Akira);
-      textSize(70);
       fill("white");
 
       logo.style("left: 4%; top: 8%; height: 7vh");
-
-      image(angerShape, width / 2, height / 2, height / 1.1, height / 1.1);
-      text(
-        data[2].happiness,
-        width / 2 - height / 1.1 / 2,
-        height / 2 - height / 1.1 / 2,
-        height / 1.1,
-        height / 1.1
-      );
 
       switch (content) {
         case 0:
           switch (artpage) {
             case 0:
-              if (emotion[content] == "angry") {
+              facerec.image(webcam, 0, 0, width, height);
+
+              if (detection.length > 0) {
+                console.log(emotion);
+                let x1 = detection[0].detection._box._x - width / 10;
+                let y1 = detection[0].detection._box._y - height / 10;
+
+                let x2 = detection[0].detection._box._width + width / 5;
+                let y2 = detection[0].detection._box._height + height / 5;
+
+                if (maxAngry[5] < detection[0].expressions.angry) {
+                  maxAngry[5] = detection[0].expressions.angry;
+                  faceAngry[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (maxDisgusted[5] < detection[0].expressions.disgusted) {
+                  maxDisgusted[5] = detection[0].expressions.disgusted;
+                  faceDisgusted[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (maxHappy[5] < detection[0].expressions.happy) {
+                  maxHappy[5] = detection[0].expressions.happy;
+                  faceHappy[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (maxNeutral[5] < detection[0].expressions.neutral) {
+                  maxNeutral[5] = detection[0].expressions.neutral;
+                  faceNeutral[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (maxSad[5] < detection[0].expressions.sad) {
+                  maxSad[5] = detection[0].expressions.sad;
+                  faceSad[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (maxSurprised[5] < detection[0].expressions.surprised) {
+                  maxSurprised[5] = detection[0].expressions.surprised;
+                  faceSurprised[5] = facerec.get(x1, y1, x2, y2);
+                }
+
+                if (
+                  maxAngry[5] > 0.5 ||
+                  maxDisgusted[5] > 0.5 ||
+                  maxSad[5] > 0.5 ||
+                  maxSurprised[5] > 0.5 ||
+                  maxHappy[5] > 0.5
+                ) {
+                  if (
+                    maxAngry[5] > maxDisgusted[5] &&
+                    maxAngry[5] > maxHappy[5] &&
+                    maxAngry[5] > maxSad[5] &&
+                    maxAngry[5] > maxSurprised[5]
+                  ) {
+                    emotion[5] = "angry";
+                    percentage[5] = maxAngry[5];
+                  }
+
+                  if (
+                    maxDisgusted[5] > maxAngry[5] &&
+                    maxDisgusted[5] > maxHappy[5] &&
+                    maxDisgusted[5] > maxSad[5] &&
+                    maxDisgusted[5] > maxSurprised[5]
+                  ) {
+                    emotion[5] = "disgusted";
+                    percentage[5] = maxDisgusted[5];
+                  }
+
+                  if (
+                    maxHappy[5] > maxAngry[5] &&
+                    maxHappy[5] > maxDisgusted[5] &&
+                    maxHappy[5] > maxSad[5] &&
+                    maxHappy[5] > maxSurprised[5]
+                  ) {
+                    emotion[5] = "happy";
+                    percentage[5] = maxHappy[5];
+                  }
+
+                  if (
+                    maxSad[5] > maxAngry[5] &&
+                    maxSad[5] > maxDisgusted[5] &&
+                    maxSad[5] > maxHappy[5] &&
+                    maxSad[5] > maxSurprised[5]
+                  ) {
+                    emotion[5] = "sad";
+                    percentage[5] = maxSad[5];
+                  }
+
+                  if (
+                    maxSurprised[5] > maxAngry[5] &&
+                    maxSurprised[5] > maxDisgusted[5] &&
+                    maxSurprised[5] > maxHappy[5] &&
+                    maxSurprised[5] > maxSad[5]
+                  ) {
+                    emotion[5] = "surprised";
+                    percentage[5] = maxSurprised[5];
+                  }
+                } else {
+                  emotion[5] = "neutral";
+                  percentage[5] = maxNeutral[5];
+                }
               }
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+              image(
+                contentimages[vidrand[content]],
+                width / 2 - height / 2,
+                height / 1.4,
+                450,
+                450
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                data[vidrand[content]].titolo,
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "in fact, while you were watching...",
+                width / 2,
+                height / 12
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textFont(Akira);
+              textSize(200);
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "I'm " +
+                  round(100 * percentage[content]) +
+                  "% sure that you were...",
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 2:
+              if (tempo >= 54) {
+                if (second() == 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 3:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+          }
+          break;
+        case 1:
+          switch (artpage) {
+            case 0:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+              image(
+                contentimages[vidrand[content]],
+                width / 2 - height / 2,
+                height / 1.4,
+                450,
+                450
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                data[vidrand[content]].titolo,
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "in fact, while you were watching...",
+                width / 2,
+                height / 12
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textFont(Akira);
+              textSize(200);
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "I'm " +
+                  round(100 * percentage[content]) +
+                  "% sure that you were...",
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 2:
+              if (tempo >= 54) {
+                if (second() == 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 3:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+          }
+          break;
+        case 2:
+          switch (artpage) {
+            case 0:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+              image(
+                contentimages[vidrand[content]],
+                width / 2 - height / 2,
+                height / 1.4,
+                450,
+                450
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                data[vidrand[content]].titolo,
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "in fact, while you were watching...",
+                width / 2,
+                height / 12
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textFont(Akira);
+              textSize(200);
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "I'm " +
+                  round(100 * percentage[content]) +
+                  "% sure that you were...",
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 2:
+              if (tempo >= 54) {
+                if (second() == 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 3:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+          }
+          break;
+        case 3:
+          switch (artpage) {
+            case 0:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+              image(
+                contentimages[vidrand[content]],
+                width / 2 - height / 2,
+                height / 1.4,
+                450,
+                450
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                data[vidrand[content]].titolo,
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "in fact, while you were watching...",
+                width / 2,
+                height / 12
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textFont(Akira);
+              textSize(200);
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "I'm " +
+                  round(100 * percentage[content]) +
+                  "% sure that you were...",
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 2:
+              if (tempo >= 54) {
+                if (second() == 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 3:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+          }
+          break;
+        case 4:
+          switch (artpage) {
+            case 0:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+              image(
+                contentimages[vidrand[content]],
+                width / 2 - height / 2,
+                height / 1.4,
+                450,
+                450
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                data[vidrand[content]].titolo,
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "in fact, while you were watching...",
+                width / 2,
+                height / 12
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textFont(Akira);
+              textSize(200);
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Graphik);
+              textSize(40);
+              text(
+                "I'm " +
+                  round(100 * percentage[content]) +
+                  "% sure that you were...",
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 2:
+              if (tempo >= 54) {
+                if (second() == 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 6) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+              break;
+
+            case 3:
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].anger,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                text(
+                  data[vidrand[content]].disgust,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].happiness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                text(
+                  data[vidrand[content]].sadness,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].surprise,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                text(
+                  data[vidrand[content]].neutral,
+                  width / 2 - height / 1.1 / 2,
+                  height / 2 - height / 1.1 / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              textSize(40);
+              text(
+                data[vidrand[content]].titolo +
+                  ": " +
+                  round(100 * percentage[content]) +
+                  "% " +
+                  emotion[content],
+                width / 2,
+                height / 12
+              );
+
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+              break;
+          }
+          break;
+        case 5:
+          switch (artpage) {
+            case 0:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              image(
+                surpriseShape,
+                width / 2,
+                height / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                "Are you still watching?",
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              break;
+
+            case 1:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  artpage++;
+                  tempo = second();
+                }
+              }
+
+              image(
+                happyShape,
+                width / 2,
+                height / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textFont(Akira);
+              textSize(100);
+              text(
+                "Because i was",
+                width / 2 - height / 1.1 / 2,
+                height / 2 - height / 1.1 / 2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              break;
+
+            case 2:
+              if (tempo >= 56) {
+                if (second() == 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              } else {
+                if (second() == tempo + 4) {
+                  content++;
+                  artpage = 0;
+                  tempo = second();
+                }
+              }
+
+              textFont(Akira);
+              textSize(100);
+              if (emotion[content] == "angry") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[1], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  angerShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(224, 60, 43);
+                image(
+                  faceAngry[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "disgusted") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[3], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  disgustShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.4,
+                  height / 1.4
+                );
+
+                push();
+                tint(160, 206, 17);
+                image(
+                  faceDisgusted[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "happy") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[0], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  happyShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                push();
+                tint(245, 210, 51);
+                image(
+                  faceHappy[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "sad") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[4], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  sadShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.2,
+                  height / 1.2
+                );
+
+                push();
+                tint(96, 88, 237);
+                image(
+                  faceSad[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "surprised") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[5], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  surpriseShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(176, 84, 223);
+                image(
+                  faceSurprised[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              } else if (emotion[content] == "neutral") {
+                for (let i = 0; i < 20; i++) {
+                  image(emoji[2], randposx[i], randposy[i], 50, 50);
+                  randposy[i] += randvel[i];
+
+                  if (randposy[i] > height) {
+                    randposx[i] = random(width);
+                    randposy[i] = random(-height, 0);
+                    randvel[i] = random(1, 6);
+                  }
+                }
+                image(
+                  neutralShape,
+                  width / 2,
+                  height / 2,
+                  height / 1.1,
+                  height / 1.1
+                );
+
+                push();
+                tint(114);
+                image(
+                  faceNeutral[content],
+                  width / 2,
+                  height / 2,
+                  height / 2.5,
+                  height / 2.5
+                );
+                pop();
+              }
+
+              text(
+                emotion[content],
+                width / 2 - height / 1.1 / 2,
+                height / 1.2,
+                height / 1.1,
+                height / 1.1
+              );
+
+              textSize(40);
+              text(
+                "this was your reaction to your reactions",
+                width / 2,
+                height / 12
+              );
               break;
           }
           break;
