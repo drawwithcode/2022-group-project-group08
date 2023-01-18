@@ -1,26 +1,28 @@
-let changer = 0;
+let changer = 5;
 let logo;
 let facerec;
 let preso = false;
+let avanti;
 
 let webcam;
 let faceapi;
 let faceapi2;
 let detection = [];
 let faceOptions;
-let maxHappy = 0;
-let maxSad = 0;
-let maxAngry = 0;
-let maxDisgusted = 0;
-let maxNeutral = 0;
-let maxSurprised = 0;
-let faceHappy;
-let faceSad;
-let faceAngry;
-let faceDisgusted;
-let faceNeutral;
-let faceSurprised;
+let maxHappy = [0, 0, 0, 0, 0];
+let maxSad = [0, 0, 0, 0, 0];
+let maxAngry = [0, 0, 0, 0, 0];
+let maxDisgusted = [0, 0, 0, 0, 0];
+let maxNeutral = [0, 0, 0, 0, 0];
+let maxSurprised = [0, 0, 0, 0, 0];
+let faceHappy = [];
+let faceSad = [];
+let faceAngry = [];
+let faceDisgusted = [];
+let faceNeutral = [];
+let faceSurprised = [];
 let yourFace;
+let emotion = [];
 
 let fallimg = [];
 let posximg = [];
@@ -106,11 +108,35 @@ let angle3 = 0;
 let angle4 = 0;
 let angle5 = 0;
 
+let shapeK;
+let shapeY;
+let eye;
+
+//variabili per rotazione
+let forward = true;
+let angolo = 0;
+let angolo2 = 0;
+let angolo3 = 0;
+let angolo4 = 0;
+
+let isonu;
+let esonu;
+
+let angerShape;
+let disgustShape;
+let happyShape;
+let neutralShape;
+let sadShape;
+let surpriseShape;
+let content;
+let artpage = 0;
+let data;
+
 function preload() {
   //------------------------------------------FONT----------------------------------------------------
 
-  Akira = loadFont("./Assets/Fonts/Akira Expanded Demo.otf");
-  Graphik = loadFont("./Assets/Fonts/GraphikMedium.otf");
+  Akira = loadFont("Assets/Fonts/Akira Expanded Demo.otf");
+  Graphik = loadFont("Assets/Fonts/GraphikMedium.otf");
 
   //------------------------------------------FIRST PAGE----------------------------------------------------
 
@@ -136,11 +162,31 @@ function preload() {
 
   //------------------------------------------CONTENT PAGES----------------------------------------------------
 
-  loading = loadImage("./Assets/Photos/i9.png");
+  loading = loadImage("Assets/Photos/i9.png");
+
+  //------------------------------------------FINAL PAGE----------------------------------------------------
+
+  eye = loadImage("Assets/Graphics/occhio.png");
+  shapeK = shapeH;
+  shapeY = loadImage("Assets/Graphics/4.png");
+  isonu = loadImage("Assets/Graphics/isonu.png");
+  esonu = loadImage("Assets/Graphics/esonu.png");
+
+  //------------------------------------------ARTWORK----------------------------------------------------
+
+  angerShape = loadImage("Assets/Graphics/0.png");
+  disgustShape = shapeD;
+  happyShape = shapeH;
+  neutralShape = loadImage("Assets/Graphics/3.png");
+  sadShape = shapeY;
+  surpriseShape = shapeXr;
+
+  data = loadJSON("possibilities.json");
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //const canvas.getContext("2d", { willReadFrequently: true });
   logo = select("#logo");
 
   //------------------------------------------FACE API----------------------------------------------------
@@ -154,7 +200,7 @@ function setup() {
     withExpressions: true,
     withDescriptors: false,
     withAgeAndGender: true,
-    minConfidence: 0.5,
+    minConfidence: 0.3,
   };
 
   faceapi = ml5.faceApi(webcam, faceOptions, faceReady);
@@ -195,12 +241,12 @@ function setup() {
   //------------------------------------------CONTENTS PAGES----------------------------------------------------
 
   for (let i = 0; i < 6; i++) {
-    vidrand[i] = round(random(1, 27));
+    vidrand[i] = round(random(1, 25));
   }
 
   for (let i = 0; i < 6; i++) {
     contents[vidrand[i]] = createVideo([
-      "./Assets/Contents/video" + vidrand[i] + ".mp4",
+      "Assets/Contents/video" + vidrand[i] + ".mp4",
     ]);
     contents[vidrand[i]].size(width / 1.7, (width / 1.7) * 0.56);
     contents[vidrand[i]].volume(0);
@@ -212,7 +258,7 @@ function setup() {
   }
 
   /* for (let i = 1; i <= 27; i++) {
-    contents[i] = createVideo(["./Assets/Contents/video" + i + ".mp4"]);
+    contents[i] = createVideo(["Assets/Contents/video" + i + ".mp4"]);
     contents[i].size(width / 1.7, (width / 1.7) * 0.56);
     contents[i].volume(0);
     contents[i].hide();
@@ -588,16 +634,19 @@ function draw() {
 
     //------------------------------------------CONTENTS PAGES----------------------------------------------------
     case 3:
+      push();
       clear();
+      avanti.hide();
 
       if (
-        contents[vidrand[1]].time() > floor(contents[vidrand[1]].duration())
+        contents[vidrand[1]].time() >
+        contents[vidrand[1]].duration() - 0.01
       ) {
         mode = 1;
       }
       if (
         contents[vidrand[1]].time() + contents[vidrand[2]].time() >
-        floor(contents[vidrand[1]].duration() + contents[vidrand[2]].duration())
+        contents[vidrand[1]].duration() + contents[vidrand[2]].duration() - 0.01
       ) {
         mode = 2;
       }
@@ -605,11 +654,10 @@ function draw() {
         contents[vidrand[1]].time() +
           contents[vidrand[2]].time() +
           contents[vidrand[3]].time() >
-        floor(
-          contents[vidrand[1]].duration() +
-            contents[vidrand[2]].duration() +
-            contents[vidrand[3]].duration()
-        )
+        contents[vidrand[1]].duration() +
+          contents[vidrand[2]].duration() +
+          contents[vidrand[3]].duration() -
+          0.01
       ) {
         mode = 3;
       }
@@ -618,12 +666,11 @@ function draw() {
           contents[vidrand[2]].time() +
           contents[vidrand[3]].time() +
           contents[vidrand[4]].time() >
-        floor(
-          contents[vidrand[1]].duration() +
-            contents[vidrand[2]].duration() +
-            contents[vidrand[3]].duration() +
-            contents[vidrand[4]].duration()
-        )
+        contents[vidrand[1]].duration() +
+          contents[vidrand[2]].duration() +
+          contents[vidrand[3]].duration() +
+          contents[vidrand[4]].duration() -
+          0.01
       ) {
         mode = 4;
       }
@@ -633,19 +680,116 @@ function draw() {
           contents[vidrand[3]].time() +
           contents[vidrand[4]].time() +
           contents[vidrand[5]].time() >
-        floor(
-          contents[vidrand[1]].duration() +
-            contents[vidrand[2]].duration() +
-            contents[vidrand[3]].duration() +
-            contents[vidrand[4]].duration() +
-            contents[vidrand[5]].duration()
-        )
+        contents[vidrand[1]].duration() +
+          contents[vidrand[2]].duration() +
+          contents[vidrand[3]].duration() +
+          contents[vidrand[4]].duration() +
+          contents[vidrand[5]].duration() -
+          0.01
       ) {
-        console.log("finito");
+        console.log(emotion);
+        changer = 4;
       }
 
       switch (mode) {
         case 0:
+          imageMode(CORNER);
+          rectMode(CORNER);
+          facerec.image(webcam, 0, 0, width, height);
+
+          if (detection.length > 0) {
+            let x1 = detection[0].detection._box._x - width / 10;
+            let y1 = detection[0].detection._box._y - height / 10;
+
+            let x2 = detection[0].detection._box._width + width / 5;
+            let y2 = detection[0].detection._box._height + height / 5;
+
+            if (maxAngry[mode] < detection[0].expressions.angry) {
+              maxAngry[mode] = detection[0].expressions.angry;
+              faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+              maxDisgusted[mode] = detection[0].expressions.disgusted;
+              faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxHappy[mode] < detection[0].expressions.happy) {
+              maxHappy[mode] = detection[0].expressions.happy;
+              faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxNeutral[mode] < detection[0].expressions.neutral) {
+              maxNeutral[mode] = detection[0].expressions.neutral;
+              faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSad[mode] < detection[0].expressions.sad) {
+              maxSad[mode] = detection[0].expressions.sad;
+              faceSad[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSurprised[mode] < detection[0].expressions.surprised) {
+              maxSurprised[mode] = detection[0].expressions.surprised;
+              faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (
+              maxAngry[mode] > 0.5 ||
+              maxDisgusted[mode] > 0.5 ||
+              maxSad[mode] > 0.5 ||
+              maxSurprised[mode] > 0.5 ||
+              maxHappy[mode] > 0.5
+            ) {
+              if (
+                maxAngry[mode] > maxDisgusted[mode] &&
+                maxAngry[mode] > maxHappy[mode] &&
+                maxAngry[mode] > maxSad[mode] &&
+                maxAngry[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "angry";
+              }
+
+              if (
+                maxDisgusted[mode] > maxAngry[mode] &&
+                maxDisgusted[mode] > maxHappy[mode] &&
+                maxDisgusted[mode] > maxSad[mode] &&
+                maxDisgusted[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "disgusted";
+              }
+
+              if (
+                maxHappy[mode] > maxAngry[mode] &&
+                maxHappy[mode] > maxDisgusted[mode] &&
+                maxHappy[mode] > maxSad[mode] &&
+                maxHappy[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "happy";
+              }
+
+              if (
+                maxSad[mode] > maxAngry[mode] &&
+                maxSad[mode] > maxDisgusted[mode] &&
+                maxSad[mode] > maxHappy[mode] &&
+                maxSad[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "sad";
+              }
+
+              if (
+                maxSurprised[mode] > maxAngry[mode] &&
+                maxSurprised[mode] > maxDisgusted[mode] &&
+                maxSurprised[mode] > maxHappy[mode] &&
+                maxSurprised[mode] > maxSad[mode]
+              ) {
+                emotion[mode] = "surprised";
+              }
+            } else {
+              emotion[mode] = "neutral";
+            }
+          }
+
           textFont(Graphik);
           fill("white");
           text3 = "You can find something like this...";
@@ -687,7 +831,6 @@ function draw() {
           );
 
           if (playing1 == false) {
-            contents[vidrand[1]].play();
             contents[vidrand[2]].play();
             contents[vidrand[3]].play();
             contents[vidrand[4]].play();
@@ -698,6 +841,7 @@ function draw() {
             contents[vidrand[5]].pause();
             playing1 = true;
           }
+          contents[vidrand[1]].play();
           if (mouseIsPressed == true) {
             for (let i = 1; i <= 5; i++) {
               contents[vidrand[i]].volume(1);
@@ -707,7 +851,105 @@ function draw() {
           let img1 = contents[vidrand[1]].get();
           image(img1, windowWidth / 2, windowHeight / 2);
           break;
+
         case 1:
+          imageMode(CORNER);
+          rectMode(CORNER);
+          facerec.image(webcam, 0, 0, width, height);
+
+          if (detection.length > 0) {
+            let x1 = detection[0].detection._box._x - width / 10;
+            let y1 = detection[0].detection._box._y - height / 10;
+
+            let x2 = detection[0].detection._box._width + width / 5;
+            let y2 = detection[0].detection._box._height + height / 5;
+
+            if (maxAngry[mode] < detection[0].expressions.angry) {
+              maxAngry[mode] = detection[0].expressions.angry;
+              faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+              maxDisgusted[mode] = detection[0].expressions.disgusted;
+              faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxHappy[mode] < detection[0].expressions.happy) {
+              maxHappy[mode] = detection[0].expressions.happy;
+              faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxNeutral[mode] < detection[0].expressions.neutral) {
+              maxNeutral[mode] = detection[0].expressions.neutral;
+              faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSad[mode] < detection[0].expressions.sad) {
+              maxSad[mode] = detection[0].expressions.sad;
+              faceSad[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSurprised[mode] < detection[0].expressions.surprised) {
+              maxSurprised[mode] = detection[0].expressions.surprised;
+              faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (
+              maxAngry[mode] > 0.5 ||
+              maxDisgusted[mode] > 0.5 ||
+              maxSad[mode] > 0.5 ||
+              maxSurprised[mode] > 0.5 ||
+              maxHappy[mode] > 0.5
+            ) {
+              if (
+                maxAngry[mode] > maxDisgusted[mode] &&
+                maxAngry[mode] > maxHappy[mode] &&
+                maxAngry[mode] > maxSad[mode] &&
+                maxAngry[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "angry";
+              }
+
+              if (
+                maxDisgusted[mode] > maxAngry[mode] &&
+                maxDisgusted[mode] > maxHappy[mode] &&
+                maxDisgusted[mode] > maxSad[mode] &&
+                maxDisgusted[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "disgusted";
+              }
+
+              if (
+                maxHappy[mode] > maxAngry[mode] &&
+                maxHappy[mode] > maxDisgusted[mode] &&
+                maxHappy[mode] > maxSad[mode] &&
+                maxHappy[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "happy";
+              }
+
+              if (
+                maxSad[mode] > maxAngry[mode] &&
+                maxSad[mode] > maxDisgusted[mode] &&
+                maxSad[mode] > maxHappy[mode] &&
+                maxSad[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "sad";
+              }
+
+              if (
+                maxSurprised[mode] > maxAngry[mode] &&
+                maxSurprised[mode] > maxDisgusted[mode] &&
+                maxSurprised[mode] > maxHappy[mode] &&
+                maxSurprised[mode] > maxSad[mode]
+              ) {
+                emotion[mode] = "surprised";
+              }
+            } else {
+              emotion[mode] = "neutral";
+            }
+          }
+
           textFont(Graphik);
           fill("white");
           text3 = "Or like this...";
@@ -749,7 +991,7 @@ function draw() {
           );
 
           if (playing2 == false) {
-            contents[vidrand[1]].pause();
+            contents[vidrand[1]].volume(0);
             contents[vidrand[2]].play();
 
             playing2 = true;
@@ -758,7 +1000,105 @@ function draw() {
           let img2 = contents[vidrand[2]].get();
           image(img2, windowWidth / 2, windowHeight / 2);
           break;
+
         case 2:
+          imageMode(CORNER);
+          rectMode(CORNER);
+          facerec.image(webcam, 0, 0, width, height);
+
+          if (detection.length > 0) {
+            let x1 = detection[0].detection._box._x - width / 10;
+            let y1 = detection[0].detection._box._y - height / 10;
+
+            let x2 = detection[0].detection._box._width + width / 5;
+            let y2 = detection[0].detection._box._height + height / 5;
+
+            if (maxAngry[mode] < detection[0].expressions.angry) {
+              maxAngry[mode] = detection[0].expressions.angry;
+              faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+              maxDisgusted[mode] = detection[0].expressions.disgusted;
+              faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxHappy[mode] < detection[0].expressions.happy) {
+              maxHappy[mode] = detection[0].expressions.happy;
+              faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxNeutral[mode] < detection[0].expressions.neutral) {
+              maxNeutral[mode] = detection[0].expressions.neutral;
+              faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSad[mode] < detection[0].expressions.sad) {
+              maxSad[mode] = detection[0].expressions.sad;
+              faceSad[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSurprised[mode] < detection[0].expressions.surprised) {
+              maxSurprised[mode] = detection[0].expressions.surprised;
+              faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (
+              maxAngry[mode] > 0.5 ||
+              maxDisgusted[mode] > 0.5 ||
+              maxSad[mode] > 0.5 ||
+              maxSurprised[mode] > 0.5 ||
+              maxHappy[mode] > 0.5
+            ) {
+              if (
+                maxAngry[mode] > maxDisgusted[mode] &&
+                maxAngry[mode] > maxHappy[mode] &&
+                maxAngry[mode] > maxSad[mode] &&
+                maxAngry[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "angry";
+              }
+
+              if (
+                maxDisgusted[mode] > maxAngry[mode] &&
+                maxDisgusted[mode] > maxHappy[mode] &&
+                maxDisgusted[mode] > maxSad[mode] &&
+                maxDisgusted[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "disgusted";
+              }
+
+              if (
+                maxHappy[mode] > maxAngry[mode] &&
+                maxHappy[mode] > maxDisgusted[mode] &&
+                maxHappy[mode] > maxSad[mode] &&
+                maxHappy[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "happy";
+              }
+
+              if (
+                maxSad[mode] > maxAngry[mode] &&
+                maxSad[mode] > maxDisgusted[mode] &&
+                maxSad[mode] > maxHappy[mode] &&
+                maxSad[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "sad";
+              }
+
+              if (
+                maxSurprised[mode] > maxAngry[mode] &&
+                maxSurprised[mode] > maxDisgusted[mode] &&
+                maxSurprised[mode] > maxHappy[mode] &&
+                maxSurprised[mode] > maxSad[mode]
+              ) {
+                emotion[mode] = "surprised";
+              }
+            } else {
+              emotion[mode] = "neutral";
+            }
+          }
+
           textFont(Graphik);
           fill("white");
           text3 = "Also like this...";
@@ -800,7 +1140,7 @@ function draw() {
           );
 
           if (playing3 == false) {
-            contents[vidrand[2]].pause();
+            contents[vidrand[2]].volume(0);
             contents[vidrand[3]].play();
             playing3 = true;
           }
@@ -808,7 +1148,105 @@ function draw() {
           let img3 = contents[vidrand[3]].get();
           image(img3, windowWidth / 2, windowHeight / 2);
           break;
+
         case 3:
+          imageMode(CORNER);
+          rectMode(CORNER);
+          facerec.image(webcam, 0, 0, width, height);
+
+          if (detection.length > 0) {
+            let x1 = detection[0].detection._box._x - width / 10;
+            let y1 = detection[0].detection._box._y - height / 10;
+
+            let x2 = detection[0].detection._box._width + width / 5;
+            let y2 = detection[0].detection._box._height + height / 5;
+
+            if (maxAngry[mode] < detection[0].expressions.angry) {
+              maxAngry[mode] = detection[0].expressions.angry;
+              faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+              maxDisgusted[mode] = detection[0].expressions.disgusted;
+              faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxHappy[mode] < detection[0].expressions.happy) {
+              maxHappy[mode] = detection[0].expressions.happy;
+              faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxNeutral[mode] < detection[0].expressions.neutral) {
+              maxNeutral[mode] = detection[0].expressions.neutral;
+              faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSad[mode] < detection[0].expressions.sad) {
+              maxSad[mode] = detection[0].expressions.sad;
+              faceSad[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSurprised[mode] < detection[0].expressions.surprised) {
+              maxSurprised[mode] = detection[0].expressions.surprised;
+              faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (
+              maxAngry[mode] > 0.5 ||
+              maxDisgusted[mode] > 0.5 ||
+              maxSad[mode] > 0.5 ||
+              maxSurprised[mode] > 0.5 ||
+              maxHappy[mode] > 0.5
+            ) {
+              if (
+                maxAngry[mode] > maxDisgusted[mode] &&
+                maxAngry[mode] > maxHappy[mode] &&
+                maxAngry[mode] > maxSad[mode] &&
+                maxAngry[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "angry";
+              }
+
+              if (
+                maxDisgusted[mode] > maxAngry[mode] &&
+                maxDisgusted[mode] > maxHappy[mode] &&
+                maxDisgusted[mode] > maxSad[mode] &&
+                maxDisgusted[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "disgusted";
+              }
+
+              if (
+                maxHappy[mode] > maxAngry[mode] &&
+                maxHappy[mode] > maxDisgusted[mode] &&
+                maxHappy[mode] > maxSad[mode] &&
+                maxHappy[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "happy";
+              }
+
+              if (
+                maxSad[mode] > maxAngry[mode] &&
+                maxSad[mode] > maxDisgusted[mode] &&
+                maxSad[mode] > maxHappy[mode] &&
+                maxSad[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "sad";
+              }
+
+              if (
+                maxSurprised[mode] > maxAngry[mode] &&
+                maxSurprised[mode] > maxDisgusted[mode] &&
+                maxSurprised[mode] > maxHappy[mode] &&
+                maxSurprised[mode] > maxSad[mode]
+              ) {
+                emotion[mode] = "surprised";
+              }
+            } else {
+              emotion[mode] = "neutral";
+            }
+          }
+
           textFont(Graphik);
           fill("white");
           text3 = "Or even like this...";
@@ -850,7 +1288,7 @@ function draw() {
           );
 
           if (playing4 == false) {
-            contents[vidrand[3]].pause();
+            contents[vidrand[3]].volume(0);
             contents[vidrand[4]].play();
             playing4 = true;
           }
@@ -858,7 +1296,105 @@ function draw() {
           let img4 = contents[vidrand[4]].get();
           image(img4, windowWidth / 2, windowHeight / 2);
           break;
+
         case 4:
+          imageMode(CORNER);
+          rectMode(CORNER);
+          facerec.image(webcam, 0, 0, width, height);
+
+          if (detection.length > 0) {
+            let x1 = detection[0].detection._box._x - width / 10;
+            let y1 = detection[0].detection._box._y - height / 10;
+
+            let x2 = detection[0].detection._box._width + width / 5;
+            let y2 = detection[0].detection._box._height + height / 5;
+
+            if (maxAngry[mode] < detection[0].expressions.angry) {
+              maxAngry[mode] = detection[0].expressions.angry;
+              faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+              maxDisgusted[mode] = detection[0].expressions.disgusted;
+              faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxHappy[mode] < detection[0].expressions.happy) {
+              maxHappy[mode] = detection[0].expressions.happy;
+              faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxNeutral[mode] < detection[0].expressions.neutral) {
+              maxNeutral[mode] = detection[0].expressions.neutral;
+              faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSad[mode] < detection[0].expressions.sad) {
+              maxSad[mode] = detection[0].expressions.sad;
+              faceSad[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (maxSurprised[mode] < detection[0].expressions.surprised) {
+              maxSurprised[mode] = detection[0].expressions.surprised;
+              faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+            }
+
+            if (
+              maxAngry[mode] > 0.5 ||
+              maxDisgusted[mode] > 0.5 ||
+              maxSad[mode] > 0.5 ||
+              maxSurprised[mode] > 0.5 ||
+              maxHappy[mode] > 0.5
+            ) {
+              if (
+                maxAngry[mode] > maxDisgusted[mode] &&
+                maxAngry[mode] > maxHappy[mode] &&
+                maxAngry[mode] > maxSad[mode] &&
+                maxAngry[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "angry";
+              }
+
+              if (
+                maxDisgusted[mode] > maxAngry[mode] &&
+                maxDisgusted[mode] > maxHappy[mode] &&
+                maxDisgusted[mode] > maxSad[mode] &&
+                maxDisgusted[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "disgusted";
+              }
+
+              if (
+                maxHappy[mode] > maxAngry[mode] &&
+                maxHappy[mode] > maxDisgusted[mode] &&
+                maxHappy[mode] > maxSad[mode] &&
+                maxHappy[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "happy";
+              }
+
+              if (
+                maxSad[mode] > maxAngry[mode] &&
+                maxSad[mode] > maxDisgusted[mode] &&
+                maxSad[mode] > maxHappy[mode] &&
+                maxSad[mode] > maxSurprised[mode]
+              ) {
+                emotion[mode] = "sad";
+              }
+
+              if (
+                maxSurprised[mode] > maxAngry[mode] &&
+                maxSurprised[mode] > maxDisgusted[mode] &&
+                maxSurprised[mode] > maxHappy[mode] &&
+                maxSurprised[mode] > maxSad[mode]
+              ) {
+                emotion[mode] = "surprised";
+              }
+            } else {
+              emotion[mode] = "neutral";
+            }
+          }
+
           textFont(Graphik);
           fill("white");
           text3 = "Or maybe like this last one...";
@@ -900,7 +1436,7 @@ function draw() {
           );
 
           if (playing5 == false) {
-            contents[vidrand[4]].pause();
+            contents[vidrand[4]].volume(0);
             contents[vidrand[5]].play();
             playing5 = true;
           }
@@ -946,6 +1482,196 @@ function draw() {
         loading.width / 6,
         loading.height / 6
       );
+      pop();
+      recth = 80;
+      break;
+
+    case 4:
+      imageMode(CENTER);
+      textAlign(LEFT);
+      rectMode(CENTER);
+      clear();
+      logo.style("left: 50%; top: 10%; height: 7vh");
+      avanti.show();
+      avanti.mousePressed(changeTo5);
+
+      if (second() % 3 == 0) {
+        if (flip == false) {
+          recth -= flipvec;
+          if (recth < flipvec) {
+            flip = true;
+          }
+        } else {
+          if (recth < 80) {
+            recth += flipvec;
+          }
+        }
+      } else {
+        if (flip == true) {
+          recth -= flipvec;
+          if (recth < flipvec) {
+            flip = false;
+          }
+        } else {
+          if (recth < 80) {
+            recth += flipvec;
+          }
+        }
+      }
+
+      push();
+      translate(width / 2, height / 4.5);
+      rotate(3);
+      if (flip == true) {
+        image(esonu, 0, 0, 500, recth);
+      } else {
+        image(isonu, 0, 0, 500, recth);
+      }
+      pop();
+      rectMode(CORNER);
+      imageMode(CORNER);
+      //testi //////////////////////////////////////////////////////////////////////////////
+      let txt =
+        "Have you ever thought that while watching this content you produce a lot of";
+      push();
+      fill(255);
+      translate(width / 7, height - height / 2);
+      textFont(Graphik);
+      textSize(40);
+      text(txt, 0, 0, 950, 300);
+      pop();
+
+      let txt1 = "unconscious reactions";
+      push();
+      fill(255);
+      translate(width / 7, height - height / 2.5);
+      textFont(Akira);
+      textSize(60);
+      text(txt1, 0, 0);
+      pop();
+
+      let txt2 =
+        "Maybe you and your friends can’t, but technology is able to understand you literally every second. I showed you different contents to see how you would have reacted to them, as an unknown person you just met who tries to start a conversation using different topics. I am always present as your reactions are, let me show you...";
+      push();
+      fill(255);
+      translate(width / 7, height - height / 3);
+      textFont(Graphik);
+      textSize(40);
+      text(txt2, 0, 0, width - width / 4, height);
+      pop();
+
+      push();
+      translate(width - width / 3.2, height - height / 2.15);
+      rotate(30);
+      fill("#1E1E1E");
+      stroke(255);
+      strokeWeight(5);
+      textFont(Akira);
+      textSize(width / 11);
+      text("?", 0, 0);
+      pop();
+      /////////////////////////////////////////////////////////////////////////////
+
+      //immagini e forme  /////////////////////////////////////////////////////////
+      imageMode(CENTER);
+      angleMode(DEGREES);
+
+      //// rotating happiness shape
+      push();
+      translate(width, height - height / 1);
+      rotate(angolo);
+      angolo++;
+      image(
+        shapeK,
+        0,
+        0,
+        (windowWidth / shapeK.width) * 300,
+        (windowWidth / shapeK.width) * 300
+      );
+      pop();
+
+      //// rotating sad shape
+      push();
+      translate(width - width / 1.2, height - height / 1.3);
+      rotate(angolo2);
+      angolo2++;
+      image(
+        shapeY,
+        0,
+        0,
+        (windowWidth / shapeY.width) * 170,
+        (windowWidth / shapeY.width) * 170
+      );
+      pop();
+
+      ///// rotating eye
+      push();
+      translate(width - width / 1.13, height - height / 1.3);
+      rotate(angolo3);
+      if (forward == true) {
+        angolo3++;
+        if (angolo3 > 50) {
+          forward = false;
+        }
+      } else {
+        angolo3--;
+        if (angolo3 < -30) {
+          forward = true;
+        }
+      }
+      image(
+        eye,
+        0,
+        0,
+        (windowWidth / eye.width) * 150,
+        (windowWidth / eye.width) * 75
+      );
+      pop();
+
+      //// rotating pupil
+      push();
+      translate(width - width / 6.5, height - height / 2);
+      rotate(angolo4);
+      angolo4++;
+      image(
+        pupil,
+        0,
+        0,
+        (windowWidth / pupil.width) * 30,
+        (windowWidth / pupil.width) * 30
+      );
+      pop();
+      break;
+
+    case 5:
+      clear();
+      imageMode(CENTER);
+      textAlign(CENTER, CENTER);
+      textFont(Akira);
+      textSize(70);
+      fill("white");
+
+      logo.style("left: 4%; top: 8%; height: 7vh");
+
+      image(angerShape, width / 2, height / 2, height / 1.1, height / 1.1);
+      text(
+        data[2].happiness,
+        width / 2 - height / 1.1 / 2,
+        height / 2 - height / 1.1 / 2,
+        height / 1.1,
+        height / 1.1
+      );
+
+      switch (content) {
+        case 0:
+          switch (artpage) {
+            case 0:
+              if (emotion[content] == "angry") {
+              }
+              break;
+          }
+          break;
+      }
       break;
   }
 }
@@ -990,6 +1716,7 @@ function gotFace2(error, result) {
   facevid = result;
   if (changer == 1) {
     faceapi2.detect(gotFace2);
+    console.log("boh");
   }
 }
 
@@ -1001,52 +1728,6 @@ function changeTo3() {
   changer = 3;
 }
 
-/* clear();
-imageMode(CORNER);
-rectMode(CORNER);
-
-facerec.image(webcam, 0, 0, width, height);
-if (detection.length > 0) {
-  let x1 = detection[0].detection._box._x - width / 10;
-  let y1 = detection[0].detection._box._y - height / 10;
-
-  let x2 = detection[0].detection._box._width + width / 5;
-  let y2 = detection[0].detection._box._height + height / 5;
-
-  if (maxAngry < detection[0].expressions.angry) {
-    maxAngry = detection[0].expressions.angry;
-    faceAngry = facerec.get(x1, y1, x2, y2);
-  }
-
-  if (maxDisgusted < detection[0].expressions.disgusted) {
-    maxDisgusted = detection[0].expressions.disgusted;
-    faceDisgusted = facerec.get(x1, y1, x2, y2);
-  }
-
-  if (maxHappy < detection[0].expressions.happy) {
-    maxHappy = detection[0].expressions.happy;
-    faceHappy = facerec.get(x1, y1, x2, y2);
-  }
-
-  if (maxNeutral < detection[0].expressions.neutral) {
-    maxNeutral = detection[0].expressions.neutral;
-    faceNeutral = facerec.get(x1, y1, x2, y2);
-  }
-
-  if (maxSad < detection[0].expressions.sad) {
-    maxSad = detection[0].expressions.sad;
-    faceSad = facerec.get(x1, y1, x2, y2);
-  }
-
-  if (maxSurprised < detection[0].expressions.surprised) {
-    maxSurprised = detection[0].expressions.surprised;
-    faceSurprised = facerec.get(x1, y1, x2, y2);
-  }
-
-  image(faceAngry, 0, 0, 100, 100);
-  image(faceDisgusted, 100, 0, 100, 100);
-  image(faceHappy, 200, 0, 100, 100);
-  image(faceNeutral, 300, 0, 100, 100);
-  image(faceSad, 400, 0, 100, 100);
-  image(faceSurprised, 500, 0, 100, 100);
-} */
+function changeTo5() {
+  changer = 5;
+}
