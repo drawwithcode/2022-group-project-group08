@@ -1,4 +1,4 @@
-let changer = 0;
+let changer = 6;
 let logo;
 let facerec;
 let preso = false;
@@ -139,6 +139,19 @@ let randposx = [];
 let randposy = [];
 let randvel = [];
 let tempo;
+
+let stickers = [];
+let xemoji = [];
+let yemoji = [];
+let velemoji = [];
+let emojisize = [];
+let emojiangle = [];
+let nemoji;
+let emojitype = 5;
+let temoji = [];
+let cnemoji;
+
+let about;
 
 function preload() {
   //------------------------------------------FONT----------------------------------------------------
@@ -295,6 +308,27 @@ function setup() {
     randposy[i] = random(-height, 0);
     randvel[i] = random(1, 6);
   }
+
+  //------------------------------------------LAST PAGE----------------------------------------------------
+
+  nemoji = round(random(20, 30));
+  angleMode(DEGREES);
+
+  for (let i = 0; i < nemoji; i++) {
+    temoji[i] = round(random(0, emojitype));
+    xemoji[i] = random(0, width);
+    yemoji[i] = random(0, -height);
+    velemoji[i] = random(1, 5);
+    emojisize[i] = 50;
+    emojiangle[i] = random(0, 360);
+  }
+
+  rectMode(CENTER);
+  about = createButton("ABOUT");
+  about.mousePressed(goToTheAbout);
+
+  recap = createButton("RECAP");
+  recap.mousePressed(goToTheRecap);
 }
 
 function draw() {
@@ -5250,15 +5284,11 @@ function draw() {
             case 2:
               if (tempo >= 56) {
                 if (second() == 4) {
-                  content++;
-                  artpage = 0;
-                  tempo = second();
+                  changer++;
                 }
               } else {
                 if (second() == tempo + 4) {
-                  content++;
-                  artpage = 0;
-                  tempo = second();
+                  changer++;
                 }
               }
 
@@ -5454,10 +5484,105 @@ function draw() {
                 width / 2,
                 height / 12
               );
+
+              text(
+                "it was the last time, i promise =)",
+                width / 2,
+                height - height / 12
+              );
               break;
           }
           break;
       }
+      break;
+
+    case 6:
+      clear();
+      logo.style("left: 50%; top: 10%; height: 7vh");
+
+      push();
+      rectMode(CENTER);
+      translate(windowWidth / 2, windowHeight / 2 - 100);
+
+      angleMode(DEGREES);
+      rotate(-2);
+      stroke("#ffffff");
+      strokeWeight(2);
+      fill("#1e1e1e");
+      rect(0, 0, windowWidth / 5, windowHeight / 8);
+
+      rotate(2);
+      noStroke();
+      fill("#ffffff");
+      textSize(width / 32);
+      textFont("Akira");
+      textAlign(CENTER, CENTER);
+      text("I'S ON U", 0, 0);
+      pop();
+
+      for (let i = 0; i < nemoji; i++) {
+        push();
+        translate(xemoji[i], yemoji[i]);
+        rotate(emojiangle[i]);
+
+        image(emoji[temoji[i]], 0, 0, emojisize[i], emojisize[i]);
+        yemoji[i] += velemoji[i];
+
+        if (yemoji[i] > height + 200) {
+          yemoji[i] = random(0, -height);
+          xemoji[i] = random(0, width);
+          emojisize[i] = 50;
+          velemoji[i] = random(1, 5);
+          emojiangle[i] = random(0, 360);
+        }
+        pop();
+      }
+
+      push();
+      rotate(2);
+      rectMode(CENTER);
+      noStroke();
+      fill("#f5d233");
+      rect(
+        windowWidth / 2 - 390,
+        windowHeight / 2 + 150,
+        windowWidth / 7,
+        windowHeight / 10
+      );
+      pop();
+
+      push();
+      rotate(-2);
+      rectMode(CENTER);
+      noStroke();
+      fill("#b054df");
+      rect(
+        windowWidth / 2 + 370,
+        windowHeight / 2 + 200,
+        windowWidth / 7,
+        windowHeight / 10
+      );
+      pop();
+
+      about.style("background-color", "#ffffff");
+      about.style("border", "0vw");
+      about.style("color", "#1E1E1E");
+      about.style("font-family", "Akira");
+      about.style("transform: translate(-50%, -50%)");
+      about.size(windowWidth / 7, windowHeight / 10);
+      about.position(windowWidth / 2 - 400, windowHeight / 2 + 150);
+      about.style("font-size", "1.5vw");
+      about.style("cursor", "pointer");
+
+      recap.style("backgound-color", "#ffffff");
+      recap.style("border", "0vw");
+      recap.style("color", "#1E1E1E");
+      recap.style("font-family", "Akira");
+      recap.style("transform: translate(-50%, -50%)");
+      recap.size(windowWidth / 7, windowHeight / 10);
+      recap.position(windowWidth / 2 + 400, windowHeight / 2 + 150);
+      recap.style("font-size", "1.5vw");
+      recap.style("cursor", "pointer");
       break;
   }
 }
@@ -5517,3 +5642,7 @@ function changeTo3() {
 function changeTo5() {
   changer = 5;
 }
+
+function goToTheAbout() {}
+
+function goToTheRecap() {}
