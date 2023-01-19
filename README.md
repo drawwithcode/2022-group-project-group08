@@ -324,8 +324,11 @@ image(img1, windowWidth / 2, windowHeight / 2);
 # REFERENCES
 
 https://www.youtube.com/watch?v=3yqANLRWGLo
+
 https://justadudewhohacks.github.io/face-api.js/docs/index.html
+
 https://ml5js.org/
+
 https://editor.p5js.org/Jaesar/sketches/gP_yqLk4J
 
 # TEAM
