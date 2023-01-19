@@ -166,6 +166,7 @@ let facesangles = [];
 let back;
 
 let button = [];
+let backrecap;
 
 function preload() {
   //------------------------------------------FONT----------------------------------------------------
@@ -241,6 +242,7 @@ function setup() {
     "Hey, to better enjoy this site we suggest to be alone in a quiet place with your earphones on, Have fun!"
   ); */
 
+  logo.show();
   //------------------------------------------FACE API----------------------------------------------------
 
   webcam = createCapture(VIDEO);
@@ -379,6 +381,10 @@ function setup() {
     button[i] = createButton("");
     button[i].hide();
   }
+
+  backrecap = createButton("<");
+  backrecap.mousePressed(goBackRecap);
+  backrecap.hide();
 }
 
 function draw() {
@@ -1809,7 +1815,6 @@ function draw() {
               facerec.image(webcam, 0, 0, width, height);
 
               if (detection.length > 0) {
-                console.log(emotion);
                 let x1 = detection[0].detection._box._x - width / 10;
                 let y1 = detection[0].detection._box._y - height / 10;
 
@@ -5778,6 +5783,7 @@ function draw() {
     case 8:
       clear();
       rectMode(CORNER);
+      textAlign(LEFT, TOP);
       back.style("backgound-color", "#ffffff");
       back.style("border", "0vw");
       back.style("color", "#1E1E1E");
@@ -5798,10 +5804,15 @@ function draw() {
       }
 
       button[2].position(width / 2, height / 2);
+      button[2].mousePressed(content2);
       button[1].position(width / 2 - height / 3.5 - 30, height / 2);
+      button[1].mousePressed(content1);
       button[0].position(width / 2 - height / 1.75 - 60, height / 2);
+      button[0].mousePressed(content0);
       button[3].position(width / 2 + height / 3.5 + 30, height / 2);
+      button[3].mousePressed(content3);
       button[4].position(width / 2 + height / 1.75 + 60, height / 2);
+      button[4].mousePressed(content4);
 
       push();
 
@@ -5846,35 +5857,220 @@ function draw() {
       pop();
 
       imageMode(CENTER);
-      image(angerShape, width / 2, height / 2, height / 3.5, height / 3.5);
-      image(
-        angerShape,
-        width / 2 - height / 3.5 - 30,
-        height / 2,
-        height / 3.5,
-        height / 3.5
-      );
-      image(
-        angerShape,
-        width / 2 - height / 1.75 - 60,
-        height / 2,
-        height / 3.5,
-        height / 3.5
-      );
-      image(
-        angerShape,
-        width / 2 + height / 3.5 + 30,
-        height / 2,
-        height / 3.5,
-        height / 3.5
-      );
-      image(
-        angerShape,
-        width / 2 + height / 1.75 + 60,
-        height / 2,
-        height / 3.5,
-        height / 3.5
-      );
+
+      if (emotion[2] == "angry") {
+        image(angerShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      } else if (emotion[2] == "disgusted") {
+        image(disgustShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      } else if (emotion[2] == "happy") {
+        image(happyShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      } else if (emotion[2] == "sad") {
+        image(sadShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      } else if (emotion[2] == "surprised") {
+        image(surpriseShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      } else if (emotion[2] == "neutral") {
+        image(neutralShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      }
+
+      if (emotion[1] == "angry") {
+        image(
+          angerShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[1] == "disgusted") {
+        image(
+          disgustShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[1] == "happy") {
+        image(
+          happyShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[1] == "sad") {
+        image(
+          sadShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[1] == "surprised") {
+        image(
+          surpriseShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[1] == "neutral") {
+        image(
+          neutralShape,
+          width / 2 - height / 3.5 - 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      }
+
+      if (emotion[0] == "angry") {
+        image(
+          angerShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[0] == "disgusted") {
+        image(
+          disgustShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[0] == "happy") {
+        image(
+          happyShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[0] == "sad") {
+        image(
+          sadShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[0] == "surprised") {
+        image(
+          surpriseShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[0] == "neutral") {
+        image(
+          neutralShape,
+          width / 2 - height / 1.75 - 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      }
+
+      if (emotion[3] == "angry") {
+        image(
+          angerShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[3] == "disgusted") {
+        image(
+          disgustShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[3] == "happy") {
+        image(
+          happyShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[3] == "sad") {
+        image(
+          sadShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[3] == "surprised") {
+        image(
+          surpriseShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[3] == "neutral") {
+        image(
+          neutralShape,
+          width / 2 + height / 3.5 + 30,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      }
+
+      if (emotion[4] == "angry") {
+        image(
+          angerShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[4] == "disgusted") {
+        image(
+          disgustShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[4] == "happy") {
+        image(
+          happyShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[4] == "sad") {
+        image(
+          sadShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[4] == "surprised") {
+        image(
+          surpriseShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      } else if (emotion[4] == "neutral") {
+        image(
+          neutralShape,
+          width / 2 + height / 1.75 + 60,
+          height / 2,
+          height / 3.5,
+          height / 3.5
+        );
+      }
 
       image(contentimages[vidrand[2]], width / 2, height / 2, 200, 200);
       image(
@@ -5917,21 +6113,196 @@ function draw() {
       text("4", width / 2 + height / 3.5 + 30, height / 2 - 130);
       text("5", width / 2 + height / 1.75 + 60, height / 2 - 130);
       pop();
+      break;
 
-      /* if (emotion[content] == "angry") {
-        image(angerShape, width / 2, height / 2, height / 1.1, height / 1.1);
-      } else if (emotion[content] == "disgusted") {
-        image(disgustShape, width / 2, height / 2, height / 1.4, height / 1.4);
-      } else if (emotion[content] == "happy") {
-        image(happyShape, width / 2, height / 2, height / 1.2, height / 1.2);
-      } else if (emotion[content] == "sad") {
-        image(sadShape, width / 2, height / 2, height / 1.2, height / 1.2);
-      } else if (emotion[content] == "surprised") {
-        image(surpriseShape, width / 2, height / 2, height / 1.1, height / 1.1);
-      } else if (emotion[content] == "neutral") {
-        image(neutralShape, width / 2, height / 2, height / 1.1, height / 1.1);
-      } */
+    case 9:
+      clear();
+      backrecap.style("backgound-color", "#ffffff");
+      backrecap.style("border", "0vw");
+      backrecap.style("color", "#1E1E1E");
+      backrecap.style("font-family", "Akira");
+      backrecap.style("transform: translate(-50%, -50%) rotate(3deg)");
+      backrecap.size(windowWidth / 16, windowHeight / 16);
+      backrecap.position(windowWidth - 150, 100);
+      backrecap.style("font-size", "1.5vw");
+      backrecap.style("cursor", "pointer");
+      backrecap.show();
 
+      push();
+
+      angleMode(DEGREES);
+      rectMode(CENTER);
+      noStroke();
+      translate(windowWidth / 2, windowHeight / 2);
+      rotate(7);
+      fill("#b045df");
+      rect(-10, -350, 280, 80);
+
+      pop();
+
+      push();
+
+      angleMode(DEGREES);
+      rectMode(CENTER);
+      noStroke();
+      translate(windowWidth / 2, windowHeight / 2);
+      rotate(2);
+      rect(0, -350, 280, 80);
+      textSize(40);
+      textFont("Akira");
+      textAlign(CENTER, CENTER);
+      fill("#000000");
+      text("RECAP", 0, -350);
+      fill("#ffffff");
+      rotate(-2);
+      text(data[vidrand[0]].titolo, 0, -250);
+
+      pop();
+
+      imageMode(CENTER);
+      push();
+      tint("#f5d233");
+      image(
+        faceHappy[selectedcontent],
+        width / 2,
+        height / 2 - 30,
+        height / 4,
+        height / 4
+      );
+      pop();
+      push();
+      tint("#e03c2b");
+      image(
+        faceAngry[selectedcontent],
+        width / 2,
+        height / 2 + height / 4 + 50,
+        height / 4,
+        height / 4
+      );
+      pop();
+      push();
+      tint("#474747");
+      image(
+        faceNeutral[selectedcontent],
+        width / 2 + width / 4,
+        height / 2 - 30,
+        height / 4,
+        height / 4
+      );
+      pop();
+      push();
+      tint("#a0ce11");
+      image(
+        faceDisgusted[selectedcontent],
+        width / 2 + width / 4,
+        height / 2 + height / 4 + 50,
+        height / 4,
+        height / 4
+      );
+      pop();
+      push();
+      tint("#6058ed");
+      image(
+        faceSad[selectedcontent],
+        width / 2 - width / 4,
+        height / 2 - 30,
+        height / 4,
+        height / 4
+      );
+      pop();
+      push();
+      tint("#b054df");
+      image(
+        faceSurprised[selectedcontent],
+        width / 2 - width / 4,
+        height / 2 + height / 4 + 50,
+        height / 4,
+        height / 4
+      );
+      pop();
+
+      image(
+        emoji[0],
+        width / 2 + height / 10,
+        height / 2 - 30 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      image(
+        emoji[1],
+        width / 2 + height / 10,
+        height / 2 + height / 4 + 50 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      image(
+        emoji[3],
+        width / 2 + width / 4 + height / 10,
+        height / 2 + height / 4 + 50 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      image(
+        emoji[2],
+        width / 2 + width / 4 + height / 10,
+        height / 2 - 30 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      image(
+        emoji[4],
+        width / 2 - width / 4 + height / 10,
+        height / 2 - 30 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      image(
+        emoji[5],
+        width / 2 - width / 4 + height / 10,
+        height / 2 + height / 4 + 50 + height / 10,
+        height / 8,
+        height / 8
+      );
+
+      push();
+      translate(-height / 8 - 10, -height / 8 - 10);
+      textAlign(LEFT, TOP);
+      text(
+        round(100 * maxHappy[selectedcontent]) + "%",
+        width / 2,
+        height / 2 - 30
+      );
+      text(
+        round(100 * maxAngry[selectedcontent]) + "%",
+        width / 2,
+        height / 2 + height / 4 + 50
+      );
+      text(
+        round(100 * maxNeutral[selectedcontent]) + "%",
+        width / 2 + width / 4,
+        height / 2 - 30
+      );
+      text(
+        round(100 * maxDisgusted[selectedcontent]) + "%",
+        width / 2 + width / 4,
+        height / 2 + height / 4 + 50
+      );
+      text(
+        round(100 * maxSad[selectedcontent]) + "%",
+        width / 2 - width / 4,
+        height / 2 - 30
+      );
+      text(
+        round(100 * maxSurprised[selectedcontent]) + "%",
+        width / 2 - width / 4,
+        height / 2 - 30
+      );
+      pop();
       break;
   }
 }
@@ -6004,6 +6375,10 @@ function goBack() {
   back.hide();
   about.show();
   recap.show();
+
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function goToTheRecap() {
@@ -6011,4 +6386,35 @@ function goToTheRecap() {
   about.hide();
   recap.hide();
   back.show();
+}
+
+function goBackRecap() {
+  changer = 8;
+  back.show();
+  backrecap.hide();
+}
+
+function content0() {
+  changer = 9;
+  selectedcontent = 0;
+}
+
+function content1() {
+  changer = 9;
+  selectedcontent = 1;
+}
+
+function content2() {
+  changer = 9;
+  selectedcontent = 2;
+}
+
+function content3() {
+  changer = 9;
+  selectedcontent = 3;
+}
+
+function content4() {
+  changer = 9;
+  selectedcontent = 4;
 }
