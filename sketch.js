@@ -238,9 +238,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   //const canvas.getContext("2d", { willReadFrequently: true });
   logo = select("#logo");
-  /* alert(
-    "Hey, to better enjoy this site we suggest to be alone in a quiet place with your earphones on, Have fun!"
-  ); */
+  alert(
+    "Hey, to better enjoy this site we suggest to be alone in a quiet place with your sound on, Have fun!"
+  );
 
   logo.show();
   //------------------------------------------FACE API----------------------------------------------------
@@ -6396,24 +6396,39 @@ function goBackRecap() {
 function content0() {
   changer = 9;
   selectedcontent = 0;
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function content1() {
   changer = 9;
   selectedcontent = 1;
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function content2() {
   changer = 9;
   selectedcontent = 2;
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function content3() {
   changer = 9;
   selectedcontent = 3;
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function content4() {
   changer = 9;
   selectedcontent = 4;
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
