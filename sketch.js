@@ -306,7 +306,7 @@ function setup() {
     contents[vidrand[i]] = createVideo([
       "Assets/Contents/video" + vidrand[i] + ".mp4",
     ]);
-    contents[vidrand[i]].size(width / 1.7, (width / 1.7) * 0.56);
+    contents[vidrand[i]].size(width / 2, (width / 2) * 0.56);
     contents[vidrand[i]].volume(0);
     contents[vidrand[i]].hide();
   }
@@ -345,9 +345,11 @@ function setup() {
   rectMode(CENTER);
   about = createButton("ABOUT");
   about.mousePressed(goToTheAbout);
+  about.hide();
 
   recap = createButton("RECAP");
   recap.mousePressed(goToTheRecap);
+  recap.hide();
 
   //------------------------------------------ABOUT----------------------------------------------------
 
@@ -365,6 +367,7 @@ function setup() {
 
   back = createButton("X");
   back.mousePressed(goBack);
+  back.hide();
 
   //------------------------------------------RECAP----------------------------------------------------
 
@@ -460,7 +463,7 @@ function draw() {
     case 1:
       if (vidbool == false) {
         vid = createVideo("Assets/Video/videoiniz.mp4");
-        vid.size(width / 1.7, (width / 1.7) * 0.56);
+        vid.size(width / 2, (width / 2) * 0.56);
         vid.volume(0);
         vid.loop();
         vid.hide();
@@ -557,43 +560,43 @@ function draw() {
 
       fill("white");
       textFont(Graphik);
-      textSize(40);
+      textSize(height / 29.3);
       text(
         text0.substring(0, text1index),
         width / 2 - vid.width / 2,
-        height / 2 + vid.height / 2 + 100
+        height / 2 + vid.height / 2 + height / 18
       );
 
       textFont(Akira);
-      textSize(40);
+      textSize(height / 29.3);
       if (text1index > 7) {
         push();
         rectMode(CENTER);
         translate(
           width / 2 - vid.width / 2 + 220,
-          height / 2 + vid.height / 2 + 80
+          height / 2 + vid.height / 2 + height / 20
         );
         rotate(2);
         fill("#F5D233");
-        rect(0, 0, 140, 60);
+        rect(0, -10, 140, 60);
         pop();
 
         fill("#1e1e1e");
         text(
           text1.substring(0, text1index - 7),
           width / 2 - vid.width / 2 + 160,
-          height / 2 + vid.height / 2 + 100
+          height / 2 + vid.height / 2 + height / 18
         );
       }
 
       fill("white");
       textFont(Graphik);
-      textSize(40);
+      textSize(height / 29.3);
       if (text1index > 11) {
         text(
           text2.substring(0, text1index - 11),
           width / 2 - vid.width / 2,
-          height / 2 + vid.height / 2 + 150
+          height / 2 + vid.height / 2 + height / 9
         );
       }
 
@@ -627,7 +630,7 @@ function draw() {
       fill(255);
       translate(width / 7, height / 2);
       textFont(Graphik);
-      textSize(40);
+      textSize(height / 29.3);
       text(t, 0, 0, width - width / 4, height);
       pop();
 
@@ -920,10 +923,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(40);
+          textSize(height / 29.3);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(40);
+          textSize(height / 29.3);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -934,15 +937,15 @@ function draw() {
           translate(windowWidth / 2, windowHeight / 2);
           angleMode(DEGREES);
           rotate(-5);
-          rect(0, 0, width / 1.7, (width / 1.7) * 0.56);
+          rect(0, 0, width / 2, (width / 2) * 0.56);
           pop();
           //fill("#6058ED");
           fill(myColors[randCol[1]]);
           rect(
             windowWidth / 2,
             windowHeight / 2,
-            width / 1.7,
-            (width / 1.7) * 0.56
+            width / 2,
+            (width / 2) * 0.56
           );
 
           imageMode(CENTER);
@@ -1086,10 +1089,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(40);
+          textSize(height / 29.3);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(40);
+          textSize(height / 29.3);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1100,15 +1103,15 @@ function draw() {
           translate(windowWidth / 2, windowHeight / 2);
           angleMode(DEGREES);
           rotate(-5);
-          rect(0, 0, width / 1.7, (width / 1.7) * 0.56);
+          rect(0, 0, width / 2, (width / 2) * 0.56);
           pop();
           fill("#6058ED");
           fill(myColors[randCol[2]]);
           rect(
             windowWidth / 2,
             windowHeight / 2,
-            width / 1.7,
-            (width / 1.7) * 0.56
+            width / 2,
+            (width / 2) * 0.56
           );
 
           imageMode(CENTER);
@@ -1241,10 +1244,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(40);
+          textSize(height / 29.3);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(40);
+          textSize(height / 29.3);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1255,15 +1258,15 @@ function draw() {
           translate(windowWidth / 2, windowHeight / 2);
           angleMode(DEGREES);
           rotate(-5);
-          rect(0, 0, width / 1.7, (width / 1.7) * 0.56);
+          rect(0, 0, width / 2, (width / 2) * 0.56);
           pop();
           //fill("#6058ED");
           fill(myColors[randCol[3]]);
           rect(
             windowWidth / 2,
             windowHeight / 2,
-            width / 1.7,
-            (width / 1.7) * 0.56
+            width / 2,
+            (width / 2) * 0.56
           );
 
           imageMode(CENTER);
@@ -1395,10 +1398,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(40);
+          textSize(height / 29.3);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(40);
+          textSize(height / 29.3);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1409,15 +1412,15 @@ function draw() {
           translate(windowWidth / 2, windowHeight / 2);
           angleMode(DEGREES);
           rotate(-5);
-          rect(0, 0, width / 1.7, (width / 1.7) * 0.56);
+          rect(0, 0, width / 2, (width / 2) * 0.56);
           pop();
           //fill("#6058ED");
           fill(myColors[randCol[4]]);
           rect(
             windowWidth / 2,
             windowHeight / 2,
-            width / 1.7,
-            (width / 1.7) * 0.56
+            width / 2,
+            (width / 2) * 0.56
           );
 
           imageMode(CENTER);
@@ -1549,10 +1552,10 @@ function draw() {
           textvolume = "*TURN UP THE VOLUME";
           textAlign(CENTER, CENTER);
           //rectMode(CENTER);
-          textSize(40);
+          textSize(height / 29.3);
           text(text3, windowWidth / 2, windowHeight / 12);
           textFont(Akira);
-          textSize(40);
+          textSize(height / 29.3);
           text(textvolume, windowWidth / 2, (1.5 * windowHeight) / 12);
 
           rectMode(CENTER);
@@ -1563,15 +1566,15 @@ function draw() {
           translate(windowWidth / 2, windowHeight / 2);
           angleMode(DEGREES);
           rotate(-5);
-          rect(0, 0, width / 1.7, (width / 1.7) * 0.56);
+          rect(0, 0, width / 2, (width / 2) * 0.56);
           pop();
           //fill("#6058ED");
           fill(myColors[randCol[5]]);
           rect(
             windowWidth / 2,
             windowHeight / 2,
-            width / 1.7,
-            (width / 1.7) * 0.56
+            width / 2,
+            (width / 2) * 0.56
           );
 
           imageMode(CENTER);
@@ -1685,7 +1688,7 @@ function draw() {
       fill(255);
       translate(width / 7, height - height / 2);
       textFont(Graphik);
-      textSize(40);
+      textSize(height / 29.3);
       text(txt, 0, 0, 950, 300);
       pop();
 
@@ -1704,7 +1707,7 @@ function draw() {
       fill(255);
       translate(width / 7, height - height / 3);
       textFont(Graphik);
-      textSize(40);
+      textSize(height / 29.3);
       text(txt2, 0, 0, width - width / 4, height);
       pop();
 
@@ -1978,7 +1981,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 data[vidrand[content]].titolo,
                 width / 2 - height / 1.1 / 2,
@@ -1988,7 +1991,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "in fact, while you were watching...",
                 width / 2,
@@ -2121,7 +2124,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 emotion[content],
                 width / 2 - height / 1.1 / 2,
@@ -2131,7 +2134,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "I'm " +
                   round(100 * percentage[content]) +
@@ -2154,7 +2157,7 @@ function draw() {
                 }
               }
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -2313,7 +2316,7 @@ function draw() {
                 );
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -2341,7 +2344,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -2565,7 +2568,7 @@ function draw() {
                 pop();
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -2651,7 +2654,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 data[vidrand[content]].titolo,
                 width / 2 - height / 1.1 / 2,
@@ -2661,7 +2664,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "in fact, while you were watching...",
                 width / 2,
@@ -2794,7 +2797,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 emotion[content],
                 width / 2 - height / 1.1 / 2,
@@ -2804,7 +2807,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "I'm " +
                   round(100 * percentage[content]) +
@@ -2827,7 +2830,7 @@ function draw() {
                 }
               }
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -2986,7 +2989,7 @@ function draw() {
                 );
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -3014,7 +3017,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -3238,7 +3241,7 @@ function draw() {
                 pop();
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -3324,7 +3327,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 data[vidrand[content]].titolo,
                 width / 2 - height / 1.1 / 2,
@@ -3334,7 +3337,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "in fact, while you were watching...",
                 width / 2,
@@ -3467,7 +3470,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 emotion[content],
                 width / 2 - height / 1.1 / 2,
@@ -3477,7 +3480,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "I'm " +
                   round(100 * percentage[content]) +
@@ -3500,7 +3503,7 @@ function draw() {
                 }
               }
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -3659,7 +3662,7 @@ function draw() {
                 );
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -3687,7 +3690,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -3911,7 +3914,7 @@ function draw() {
                 pop();
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -3997,7 +4000,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 data[vidrand[content]].titolo,
                 width / 2 - height / 1.1 / 2,
@@ -4007,7 +4010,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "in fact, while you were watching...",
                 width / 2,
@@ -4140,7 +4143,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 emotion[content],
                 width / 2 - height / 1.1 / 2,
@@ -4150,7 +4153,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "I'm " +
                   round(100 * percentage[content]) +
@@ -4173,7 +4176,7 @@ function draw() {
                 }
               }
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -4332,7 +4335,7 @@ function draw() {
                 );
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -4360,7 +4363,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -4584,7 +4587,7 @@ function draw() {
                 pop();
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -4670,7 +4673,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 data[vidrand[content]].titolo,
                 width / 2 - height / 1.1 / 2,
@@ -4680,7 +4683,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "in fact, while you were watching...",
                 width / 2,
@@ -4813,7 +4816,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 emotion[content],
                 width / 2 - height / 1.1 / 2,
@@ -4823,7 +4826,7 @@ function draw() {
               );
 
               textFont(Graphik);
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "I'm " +
                   round(100 * percentage[content]) +
@@ -4846,7 +4849,7 @@ function draw() {
                 }
               }
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -5005,7 +5008,7 @@ function draw() {
                 );
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -5019,7 +5022,7 @@ function draw() {
 
             case 3:
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -5243,7 +5246,7 @@ function draw() {
                 pop();
               }
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 data[vidrand[content]].titolo +
                   ": " +
@@ -5294,7 +5297,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               text(
                 "Are you still watching?",
                 width / 2 - height / 1.1 / 2,
@@ -5327,7 +5330,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(200);
+              textSize(height / 6);
               text(
                 "Because i was",
                 width / 2 - height / 1.1 / 2,
@@ -5350,7 +5353,7 @@ function draw() {
               }
 
               textFont(Akira);
-              textSize(100);
+              textSize(height / 11.7);
               if (emotion[content] == "angry") {
                 for (let i = 0; i < 20; i++) {
                   image(emoji[1], randposx[i], randposy[i], 50, 50);
@@ -5535,7 +5538,7 @@ function draw() {
                 height / 1.1
               );
 
-              textSize(40);
+              textSize(height / 29.3);
               text(
                 "this was your reaction to your reactions",
                 width / 2,
@@ -5632,6 +5635,7 @@ function draw() {
       about.position(windowWidth / 2 - 400, windowHeight / 2 + 150);
       about.style("font-size", "1.5vw");
       about.style("cursor", "pointer");
+      about.show();
 
       recap.style("backgound-color", "#ffffff");
       recap.style("border", "0vw");
@@ -5642,6 +5646,7 @@ function draw() {
       recap.position(windowWidth / 2 + 400, windowHeight / 2 + 150);
       recap.style("font-size", "1.5vw");
       recap.style("cursor", "pointer");
+      recap.show();
       pop();
       break;
 
@@ -5658,6 +5663,7 @@ function draw() {
       back.position(windowWidth - 150, 100);
       back.style("font-size", "1.5vw");
       back.style("cursor", "pointer");
+      back.show();
 
       for (let i = 0; i < nfaces; i++) {
         push();
@@ -5679,7 +5685,7 @@ function draw() {
         push();
         noStroke();
         fill("#ffffff");
-        textSize(40);
+        textSize(height / 29.3);
         textFont("Graphik");
         text(
           "I'S ON U is a web experience built on p5.js with the aim of showing the users the intangible presence of two spheres, the technological and the human one.",
@@ -5700,7 +5706,7 @@ function draw() {
         push();
         noStroke();
         fill("#ffffff");
-        textSize(40);
+        textSize(height / 29.3);
         textFont("Graphik");
         text(
           "Andrea Corsini, Beatrice Ulivi, Sabrina Morelli, Simone Cerea, Yousef Taffal",
@@ -5721,7 +5727,7 @@ function draw() {
         push();
         noStroke();
         fill("#ffffff");
-        textSize(40);
+        textSize(height / 29.3);
         textFont("Graphik");
         text(
           "Creative Coding     A.Y. 2022-2023 Politecnico di Milano",
@@ -5735,7 +5741,7 @@ function draw() {
         push();
         noStroke();
         fill("#ffffff");
-        textSize(40);
+        textSize(height / 29.3);
         textFont("Graphik");
         text(
           "Michele Mauri, Andrea Benedetti, Tommaso Elli",
@@ -5754,7 +5760,7 @@ function draw() {
         translate(windowWidth / 2, windowHeight / 2);
         rotate(7);
         fill("#f5d233");
-        rect(-10, -350, 280, 80);
+        rect(-10, -height / 3.3, 280, 80);
 
         pop();
 
@@ -5765,12 +5771,12 @@ function draw() {
         noStroke();
         translate(windowWidth / 2, windowHeight / 2);
         rotate(2);
-        rect(0, -350, 280, 80);
-        textSize(40);
+        rect(0, -height / 3.3, 280, 80);
+        textSize(height / 29.3);
         textFont("Akira");
         textAlign(CENTER, CENTER);
         fill("#000000");
-        text("ABOUT", 0, -350);
+        text("ABOUT", 0, -height / 3.3);
 
         pop();
       }
@@ -5818,7 +5824,7 @@ function draw() {
       translate(windowWidth / 2, windowHeight / 2);
       rotate(7);
       fill("#b045df");
-      rect(-10, -350, 280, 80);
+      rect(-10, -height / 3.3, 280, 80);
 
       pop();
 
@@ -5829,19 +5835,19 @@ function draw() {
       noStroke();
       translate(windowWidth / 2, windowHeight / 2);
       rotate(2);
-      rect(0, -350, 280, 80);
-      textSize(40);
+      rect(0, -height / 3.3, 280, 80);
+      textSize(height / 29.3);
       textFont("Akira");
       textAlign(CENTER, CENTER);
       fill("#000000");
-      text("RECAP", 0, -350);
+      text("RECAP", 0, -height / 3.3);
 
       pop();
 
       push();
       noStroke();
       fill("#ffffff");
-      textSize(40);
+      textSize(height / 29.3);
       textFont("Graphik");
       text(
         "Select a content to have a deeper look to the whole range of emotions you showed watching it.",
@@ -6100,7 +6106,7 @@ function draw() {
       push();
       noStroke();
       fill("#ffffff");
-      textSize(100);
+      textSize(height / 11.7);
       textAlign(CENTER);
       textFont("Akira");
       text("3", width / 2, height / 2 - 150);
@@ -6132,7 +6138,7 @@ function draw() {
       translate(windowWidth / 2, windowHeight / 2);
       rotate(7);
       fill("#b045df");
-      rect(-10, -350, 280, 80);
+      rect(-10, -height / 3.3, 280, 80);
 
       pop();
 
@@ -6143,15 +6149,15 @@ function draw() {
       noStroke();
       translate(windowWidth / 2, windowHeight / 2);
       rotate(2);
-      rect(0, -350, 280, 80);
-      textSize(40);
+      rect(0, -height / 3.3, 280, 80);
+      textSize(height / 29.3);
       textFont("Akira");
       textAlign(CENTER, CENTER);
       fill("#000000");
-      text("RECAP", 0, -350);
+      text("RECAP", 0, -height / 3.3);
       fill("#ffffff");
       rotate(-2);
-      text(data[vidrand[0]].titolo, 0, -250);
+      text(data[vidrand[0]].titolo, 0, -height / 4.6);
 
       pop();
 
