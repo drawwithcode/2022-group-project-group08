@@ -1809,7 +1809,6 @@ function draw() {
               facerec.image(webcam, 0, 0, width, height);
 
               if (detection.length > 0) {
-                console.log(emotion);
                 let x1 = detection[0].detection._box._x - width / 10;
                 let y1 = detection[0].detection._box._y - height / 10;
 
@@ -6004,6 +6003,10 @@ function goBack() {
   back.hide();
   about.show();
   recap.show();
+
+  for (let i = 0; i < 5; i++) {
+    button[i].hide();
+  }
 }
 
 function goToTheRecap() {
