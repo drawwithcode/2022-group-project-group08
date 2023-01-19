@@ -1,11 +1,11 @@
 @font-face {
   font-family: Akira;
-  src: url("./Assets/Fonts/Akira Expanded Demo.otf");
+  src: url("Assets/Fonts/Akira Expanded Demo.otf");
 }
 
 @font-face {
   font-family: Graphik;
-  src: url("./Assets/Fonts/GraphikMedium.otf");
+  src: url("Assets/Fonts/GraphikMedium.otf");
 }
 
 html,
@@ -26,4 +26,13 @@ canvas {
   left: 50%;
   top: 30%;
   height: 20vh;
+}
+
+#p5_loading {
+  background-image: url("./assets/Graphics/loading.gif");
+
+  background-color: #1e1e1e;
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
 }

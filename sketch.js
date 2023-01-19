@@ -1,4 +1,4 @@
-let changer = 6;
+let changer = 0;
 let logo;
 let facerec;
 let preso = false;
@@ -153,6 +153,20 @@ let cnemoji;
 
 let about;
 
+let ourfaces = [];
+let facetype = 4;
+let cnfaces;
+let nfaces;
+let tfaces = [];
+let xfaces = [];
+let yfaces = [];
+let velfaces = [];
+let facessize = [];
+let facesangles = [];
+let back;
+
+let button = [];
+
 function preload() {
   //------------------------------------------FONT----------------------------------------------------
 
@@ -211,15 +225,21 @@ function preload() {
   for (let i = 0; i < 6; i++) {
     emoji[i] = loadImage("Assets/Graphics/Emoji" + i + ".png");
   }
+
+  //------------------------------------------ABOUT----------------------------------------------------
+
+  for (let i = 0; i <= facetype; i++) {
+    ourfaces[i] = loadImage("Assets/Faces/Face" + i + ".png");
+  }
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //const canvas.getContext("2d", { willReadFrequently: true });
   logo = select("#logo");
-  alert(
+  /* alert(
     "Hey, to better enjoy this site we suggest to be alone in a quiet place with your earphones on, Have fun!"
-  );
+  ); */
 
   //------------------------------------------FACE API----------------------------------------------------
 
@@ -274,6 +294,12 @@ function setup() {
 
   for (let i = 0; i < 5; i++) {
     vidrand[i] = round(random(0, 24));
+
+    for (let j = 0; j < i; j++) {
+      while (vidrand[i] == vidrand[j] && i != j) {
+        vidrand[i] = round(random(0, 24));
+      }
+    }
   }
 
   for (let i = 0; i < 5; i++) {
@@ -329,6 +355,30 @@ function setup() {
 
   recap = createButton("RECAP");
   recap.mousePressed(goToTheRecap);
+
+  //------------------------------------------ABOUT----------------------------------------------------
+
+  nfaces = round(random(15, 25));
+  angleMode(DEGREES);
+
+  for (let i = 0; i < nfaces; i++) {
+    tfaces[i] = round(random(0, facetype));
+    xfaces[i] = random(0, width);
+    yfaces[i] = random(0, -height);
+    velfaces[i] = random(1, 5);
+    facessize[i] = random(100, 150);
+    facesangles[i] = random(0, 360);
+  }
+
+  back = createButton("X");
+  back.mousePressed(goBack);
+
+  //------------------------------------------RECAP----------------------------------------------------
+
+  for (let i = 0; i < 5; i++) {
+    button[i] = createButton("");
+    button[i].hide();
+  }
 }
 
 function draw() {
@@ -421,9 +471,14 @@ function draw() {
         vidbool = true;
 
         avanti = createButton(">");
-        avanti.style(
-          "height: 1vw;width: 1vw;font-size: 60px;border: none; background-color: #1e1e1e; color:white"
-        );
+        avanti.style("backgound-color", "#ffffff");
+        avanti.style("border", "0vw");
+        avanti.style("color", "#1E1E1E");
+        avanti.style("font-family", "Akira");
+        avanti.style("transform: translate(-50%, -50%) rotate(3deg)");
+        avanti.size(windowWidth / 16, windowHeight / 16);
+        avanti.position(windowWidth - 150, 100);
+        avanti.style("font-size", "1.5vw");
         avanti.style("cursor", "pointer");
       }
       if (vid.time() == 0 && vidbool2 == false) {
@@ -1746,6 +1801,7 @@ function draw() {
 
       logo.style("left: 4%; top: 8%; height: 7vh");
 
+      push();
       switch (content) {
         case 0:
           switch (artpage) {
@@ -5494,9 +5550,11 @@ function draw() {
           }
           break;
       }
+      pop();
       break;
 
     case 6:
+      push();
       clear();
       logo.style("left: 50%; top: 10%; height: 7vh");
 
@@ -5583,6 +5641,297 @@ function draw() {
       recap.position(windowWidth / 2 + 400, windowHeight / 2 + 150);
       recap.style("font-size", "1.5vw");
       recap.style("cursor", "pointer");
+      pop();
+      break;
+
+    case 7:
+      clear();
+      rectMode(CORNER);
+      textAlign(LEFT, TOP);
+      back.style("backgound-color", "#ffffff");
+      back.style("border", "0vw");
+      back.style("color", "#1E1E1E");
+      back.style("font-family", "Akira");
+      back.style("transform: translate(-50%, -50%) rotate(3deg)");
+      back.size(windowWidth / 16, windowHeight / 16);
+      back.position(windowWidth - 150, 100);
+      back.style("font-size", "1.5vw");
+      back.style("cursor", "pointer");
+
+      for (let i = 0; i < nfaces; i++) {
+        push();
+        translate(xfaces[i], yfaces[i]);
+        rotate(facesangles[i]);
+
+        image(ourfaces[tfaces[i]], 0, 0, facessize[i], facessize[i]);
+        yfaces[i] += velfaces[i];
+
+        if (yfaces[i] > height + 200) {
+          yfaces[i] = random(0, -height);
+          xfaces[i] = random(0, width);
+          facessize[i] = random(100, 150);
+          velfaces[i] = random(1, 5);
+          facesangles[i] = random(0, 360);
+        }
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(40);
+        textFont("Graphik");
+        text(
+          "I'S ON U is a web experience built on p5.js with the aim of showing the users the intangible presence of two spheres, the technological and the human one.",
+          width / 10,
+          height / 2 - 150,
+          width - width / 5
+        );
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(width / 40);
+        textFont("Akira");
+        text("TEAM", width / 10, height / 2 - 20, width - width / 5);
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(40);
+        textFont("Graphik");
+        text(
+          "Andrea Corsini, Beatrice Ulivi, Sabrina Morelli, Simone Cerea, Yousef Taffal",
+          width / 10,
+          height / 2 + 40,
+          width - width / 5
+        );
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(width / 40);
+        textFont("Akira");
+        text("FACULTY", width / 10, height / 2 + 130, width - width / 5);
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(40);
+        textFont("Graphik");
+        text(
+          "Creative Coding     A.Y. 2022-2023 Politecnico di Milano",
+          width / 10,
+          height / 2 + 200,
+          430,
+          300
+        );
+        pop();
+
+        push();
+        noStroke();
+        fill("#ffffff");
+        textSize(40);
+        textFont("Graphik");
+        text(
+          "Michele Mauri, Andrea Benedetti, Tommaso Elli",
+          width / 10,
+          height / 2 + 400,
+          1250,
+          300
+        );
+        pop();
+
+        push();
+
+        angleMode(DEGREES);
+        rectMode(CENTER);
+        noStroke();
+        translate(windowWidth / 2, windowHeight / 2);
+        rotate(7);
+        fill("#f5d233");
+        rect(-10, -350, 280, 80);
+
+        pop();
+
+        push();
+
+        angleMode(DEGREES);
+        rectMode(CENTER);
+        noStroke();
+        translate(windowWidth / 2, windowHeight / 2);
+        rotate(2);
+        rect(0, -350, 280, 80);
+        textSize(40);
+        textFont("Akira");
+        textAlign(CENTER, CENTER);
+        fill("#000000");
+        text("ABOUT", 0, -350);
+
+        pop();
+      }
+      break;
+
+    case 8:
+      clear();
+      rectMode(CORNER);
+      back.style("backgound-color", "#ffffff");
+      back.style("border", "0vw");
+      back.style("color", "#1E1E1E");
+      back.style("font-family", "Akira");
+      back.style("transform: translate(-50%, -50%) rotate(3deg)");
+      back.size(windowWidth / 16, windowHeight / 16);
+      back.position(windowWidth - 150, 100);
+      back.style("font-size", "1.5vw");
+      back.style("cursor", "pointer");
+
+      for (let i = 0; i < 5; i++) {
+        button[i].show();
+        button[i].style("border", "0vw");
+        button[i].style("background-color: transparent");
+        button[i].style("transform: translate(-50%, -50%)");
+        button[i].size(height / 3.5, height / 3.5);
+        button[i].style("cursor", "pointer");
+      }
+
+      button[2].position(width / 2, height / 2);
+      button[1].position(width / 2 - height / 3.5 - 30, height / 2);
+      button[0].position(width / 2 - height / 1.75 - 60, height / 2);
+      button[3].position(width / 2 + height / 3.5 + 30, height / 2);
+      button[4].position(width / 2 + height / 1.75 + 60, height / 2);
+
+      push();
+
+      angleMode(DEGREES);
+      rectMode(CENTER);
+      noStroke();
+      translate(windowWidth / 2, windowHeight / 2);
+      rotate(7);
+      fill("#b045df");
+      rect(-10, -350, 280, 80);
+
+      pop();
+
+      push();
+
+      angleMode(DEGREES);
+      rectMode(CENTER);
+      noStroke();
+      translate(windowWidth / 2, windowHeight / 2);
+      rotate(2);
+      rect(0, -350, 280, 80);
+      textSize(40);
+      textFont("Akira");
+      textAlign(CENTER, CENTER);
+      fill("#000000");
+      text("RECAP", 0, -350);
+
+      pop();
+
+      push();
+      noStroke();
+      fill("#ffffff");
+      textSize(40);
+      textFont("Graphik");
+      text(
+        "Select a content to have a deeper look to the whole range of emotions you showed watching it.",
+        width / 10,
+        height / 1.3,
+        width - width / 5
+      );
+
+      pop();
+
+      imageMode(CENTER);
+      image(angerShape, width / 2, height / 2, height / 3.5, height / 3.5);
+      image(
+        angerShape,
+        width / 2 - height / 3.5 - 30,
+        height / 2,
+        height / 3.5,
+        height / 3.5
+      );
+      image(
+        angerShape,
+        width / 2 - height / 1.75 - 60,
+        height / 2,
+        height / 3.5,
+        height / 3.5
+      );
+      image(
+        angerShape,
+        width / 2 + height / 3.5 + 30,
+        height / 2,
+        height / 3.5,
+        height / 3.5
+      );
+      image(
+        angerShape,
+        width / 2 + height / 1.75 + 60,
+        height / 2,
+        height / 3.5,
+        height / 3.5
+      );
+
+      image(contentimages[vidrand[2]], width / 2, height / 2, 200, 200);
+      image(
+        contentimages[vidrand[3]],
+        width / 2 + height / 3.5 + 30,
+        height / 2,
+        200,
+        200
+      );
+      image(
+        contentimages[vidrand[4]],
+        width / 2 + height / 1.75 + 60,
+        height / 2,
+        200,
+        200
+      );
+      image(
+        contentimages[vidrand[0]],
+        width / 2 - height / 1.75 - 60,
+        height / 2,
+        200,
+        200
+      );
+      image(
+        contentimages[vidrand[1]],
+        width / 2 - height / 3.5 - 30,
+        height / 2,
+        200,
+        200
+      );
+      push();
+      noStroke();
+      fill("#ffffff");
+      textSize(100);
+      textAlign(CENTER);
+      textFont("Akira");
+      text("3", width / 2, height / 2 - 130);
+      text("2", width / 2 - height / 3.5 - 30, height / 2 - 130);
+      text("1", width / 2 - height / 1.75 - 60, height / 2 - 130);
+      text("4", width / 2 + height / 3.5 + 30, height / 2 - 130);
+      text("5", width / 2 + height / 1.75 + 60, height / 2 - 130);
+      pop();
+
+      /* if (emotion[content] == "angry") {
+        image(angerShape, width / 2, height / 2, height / 1.1, height / 1.1);
+      } else if (emotion[content] == "disgusted") {
+        image(disgustShape, width / 2, height / 2, height / 1.4, height / 1.4);
+      } else if (emotion[content] == "happy") {
+        image(happyShape, width / 2, height / 2, height / 1.2, height / 1.2);
+      } else if (emotion[content] == "sad") {
+        image(sadShape, width / 2, height / 2, height / 1.2, height / 1.2);
+      } else if (emotion[content] == "surprised") {
+        image(surpriseShape, width / 2, height / 2, height / 1.1, height / 1.1);
+      } else if (emotion[content] == "neutral") {
+        image(neutralShape, width / 2, height / 2, height / 1.1, height / 1.1);
+      } */
+
       break;
   }
 }
@@ -5643,6 +5992,23 @@ function changeTo5() {
   changer = 5;
 }
 
-function goToTheAbout() {}
+function goToTheAbout() {
+  changer = 7;
+  about.hide();
+  recap.hide();
+  back.show();
+}
 
-function goToTheRecap() {}
+function goBack() {
+  changer = 6;
+  back.hide();
+  about.show();
+  recap.show();
+}
+
+function goToTheRecap() {
+  changer = 8;
+  about.hide();
+  recap.hide();
+  back.show();
+}
