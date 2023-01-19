@@ -295,11 +295,11 @@ function setup() {
   //------------------------------------------CONTENTS PAGES----------------------------------------------------
 
   for (let i = 0; i < 5; i++) {
-    vidrand[i] = round(random(0, 24));
+    vidrand[i] = round(random(0, 27));
 
     for (let j = 0; j < i; j++) {
       while (vidrand[i] == vidrand[j] && i != j) {
-        vidrand[i] = round(random(0, 24));
+        vidrand[i] = round(random(0, 27));
       }
     }
   }
@@ -316,13 +316,6 @@ function setup() {
   for (let i = 1; i <= 6; i++) {
     shaperand[i] = round(random(0, 5));
   }
-
-  /* for (let i = 1; i <= 27; i++) {
-    contents[i] = createVideo(["Assets/Contents/video" + i + ".mp4"]);
-    contents[i].size(width / 1.7, (width / 1.7) * 0.56);
-    contents[i].volume(0);
-    contents[i].hide();
-  } */
 
   for (let i = 0; i <= 6; i++) {
     randCol[i] = random(myColors.length - 1);
