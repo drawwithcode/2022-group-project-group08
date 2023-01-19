@@ -80,9 +80,9 @@ The Homepage is the first screen the user faces. It has been designed in a way t
 
 The screen following the Homepage shows a video where a person is using his smartphone and the face of the user, who is interacting with the website, is overlaid on the top of the face of the person in the video. The purpose of this detail is since in this way we make the user believes that he/she allowed to the camera being turned on just to appear in this screen instead of the guy in the video. In this way we are able to record the user’s emotions and reactions during the whole experience, without him/her knowing the real reason why it was necessary for him/her to consent.
 
-The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.
-
 ![](./Assets/readme/intro.png)
+
+The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.
 
 ![](./Assets/readme/70.png)
 
@@ -104,20 +104,29 @@ Once the user has become aware of the fact that his/her reactions and emotions h
 To summarize, the aim of the output with this structure is to reveal step by step the intangible presence of technology and of oneself, by allowing the user to visualize his/her reaction.
 
 ![](./Assets/readme/output.png)
+![](./Assets/readme/outputA.png)
+![](./Assets/readme/outputB.png)
+![](./Assets/readme/outputC.png)
 
 ### OUTPUT 2 - REACTION'S REACTION
 
 Our goal by showing the reaction of the reaction is to reaffirm the idea of the intangible and constant presence of technology and of ourselves, even when the experience seems to be ended. This revelation happens gradually too, through the succession of three different screens.
 
-![](./Assets/readme/output2.png)
+![](./Assets/readme/output2A.png)
+![](./Assets/readme/output2B.png)
+![](./Assets/readme/output2C.png)
 
 ### ABOUT | RECAP
 
 The last screen of the website shows two different options: the user can either explore more the project by clicking on the “About” button where he/she can see who has developed the website and why or the user can deepen more the experience that has just been lived by clicking on the “Recap” button.
 
+![](./Assets/readme/aboutrecap.png)
+![](./Assets/readme/about.png)
+
 The recap consists of a series of screens where we show the user in what percentage each emotion (happiness, sadness, disgust, indifference, surprise, anger), that was recorded, was experienced during the enjoyment of each content.
 
-![](./Assets/readme/aboutrecap.png)
+![](./Assets/readme/recap.png)
+![](./Assets/readme/recapA.png)
 
 # CHALLENGES
 
