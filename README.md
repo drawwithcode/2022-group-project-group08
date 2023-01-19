@@ -1,11 +1,12 @@
 ![](./Assets/readme/logo.png)
 
 # ABOUT
+
 I’S ON U is a web experience built on p5.js with the aim of showing the users the intangible presence of two spheres, the technological and the human one. I’S ON U is a group project designed for the Creative Coding course at Politecnico di Milano.
 
 **SPOILER ALERT!** We encourage you to not read this document before using the website.
-***
 
+---
 
 # 1. [PROJECT](#project)
 
@@ -19,7 +20,7 @@ I’S ON U is a web experience built on p5.js with the aim of showing the users 
 
 ## 1.5 [Device](#device)
 
-***
+---
 
 # 2. [STRUCTURE](#structure)
 
@@ -30,7 +31,8 @@ I’S ON U is a web experience built on p5.js with the aim of showing the users 
 ## 3.2 [Contents](#contents)
 
 ## 3.3 [Code](#code)
-***
+
+---
 
 # 4. [REFERENCES](#references)
 
@@ -48,7 +50,7 @@ The starting point for this project has been a reflection about the huge amount 
 
 ## **AIM**
 
-The aim of the project is to make the user aware that is constantly creating unconscious data such as emotions and reactions which can be detected and recorded by the presence of technology, and this happen every time he or she interacts with the machine. In order to do that we created a true experience where the users must immerge themselves.   
+The aim of the project is to make the user aware that is constantly creating unconscious data such as emotions and reactions which can be detected and recorded by the presence of technology, and this happen every time he or she interacts with the machine. In order to do that we created a true experience where the users must immerge themselves.
 
 ## **CONCEPT**
 
@@ -61,13 +63,12 @@ Because of how the website has been designed, it doesn’t require any particula
 ![](./Assets/readme/test.gif)
 
 ## **DEVICE**
-In order to use our website it is necessary to have a monitor with a webcam, a speaker and a touchpad or a mouse in order to allow the user to skip the pages whenever it is required.
 
+In order to use our website it is necessary to have a monitor with a webcam, a speaker and a touchpad or a mouse in order to allow the user to skip the pages whenever it is required.
 
 # STRUCTURE
 
 The website has been designed with the intent of being a true experience where the user immerge himself/herself without being aware of what it will happen during the evolution of the experience itself. The structure has been thought in order to reflect this aspect: we make the user believe that he/she is passively enjoying the contents and in the end we show him/her what has been his/hers active role during the interaction with the machine.
-
 
 ### HOMEPAGE
 
@@ -79,7 +80,7 @@ The Homepage is the first screen the user faces. It has been designed in a way t
 
 The screen following the Homepage shows a video where a person is using his smartphone and the face of the user, who is interacting with the website, is overlaid on the top of the face of the person in the video. The purpose of this detail is since in this way we make the user believes that he/she allowed to the camera being turned on just to appear in this screen instead of the guy in the video. In this way we are able to record the user’s emotions and reactions during the whole experience, without him/her knowing the real reason why it was necessary for him/her to consent.
 
-The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.  
+The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.
 
 ![](./Assets/readme/intro.png)
 
@@ -87,7 +88,7 @@ The storytelling continues in the next screen, which was begun with the video of
 
 ### CONTENTS
 
-The experience goes on with the vision of five visual-audio contents, one after another, that have been chosen randomly among all the ones we have selected. While the user is watching the contents, we don’t give the option of switching from one to the other: once one of them is ended, the other one starts automatically and so on. This is because our goal is to prevent the user from skipping content, so that we can record his/her complete reactions to each video and present them back to him/her at the end in the form of output.  
+The experience goes on with the vision of five visual-audio contents, one after another, that have been chosen randomly among all the ones we have selected. While the user is watching the contents, we don’t give the option of switching from one to the other: once one of them is ended, the other one starts automatically and so on. This is because our goal is to prevent the user from skipping content, so that we can record his/her complete reactions to each video and present them back to him/her at the end in the form of output.
 
 ![](./Assets/readme/video.png)
 
@@ -100,10 +101,9 @@ Once the user has watched the five visual-audio contents, another screen appears
 ### OUTPUT - REACTION
 
 Once the user has become aware of the fact that his/her reactions and emotions have been recorded through the whole experience until now, we want to show him/her what it has been effectively recorded. The user can see, for each content, the prevalent emotion that has been elicited; he/she can do it thanks to a path built on four screens. First, the user is shown what content is being considered, in order to create a direct connection between the emotion that has been felt and the content watched. Then the prevalent emotion is shown as a percentage. The following screen shows a sentence that links the user’s reaction and the audio-visual content. The purpose is to emphasize the presence of technology by humanizing it, and this detail is even more highlighted by the fact that all sentences refer directly to the user. As the last thing we want to show the user himself/herself through a picture that portrays him/her in the moment where the prevalent emotion felt was at its peak.
-To summarize, the aim of the output with this structure is to reveal step by step the intangible presence of technology and of oneself, by allowing the user to visualize his/her reaction. 
+To summarize, the aim of the output with this structure is to reveal step by step the intangible presence of technology and of oneself, by allowing the user to visualize his/her reaction.
 
 ![](./Assets/readme/output.png)
-
 
 ### OUTPUT 2 - REACTION'S REACTION
 
@@ -111,48 +111,45 @@ Our goal by showing the reaction of the reaction is to reaffirm the idea of the 
 
 ![](./Assets/readme/output2.png)
 
-
 ### ABOUT | RECAP
 
 The last screen of the website shows two different options: the user can either explore more the project by clicking on the “About” button where he/she can see who has developed the website and why or the user can deepen more the experience that has just been lived by clicking on the “Recap” button.
 
-The recap consists of a series of screens where we show the user in what percentage each emotion (happiness, sadness, disgust, indifference, surprise, anger), that was recorded, was experienced during the enjoyment of each content. 
+The recap consists of a series of screens where we show the user in what percentage each emotion (happiness, sadness, disgust, indifference, surprise, anger), that was recorded, was experienced during the enjoyment of each content.
 
 ![](./Assets/readme/aboutrecap.png)
-
 
 # CHALLENGES
 
 ## **DESIGN**
 
-
 #### NAMING
-Consistent with the theme of emotions, we designed typographic stickers that outline the visual appearance and tone of voice of the website. The logo itself, created using typefaces, helps to understand the naming through a wordplay. Two “I” are overlapped on a “U” and the two typefaces together create a smile; the phonetic expression is /I's on u/ which translates into the phrase "Eyes on You," emphasizing the constant presence of the technology's "gaze" on the user. 
+
+Consistent with the theme of emotions, we designed typographic stickers that outline the visual appearance and tone of voice of the website. The logo itself, created using typefaces, helps to understand the naming through a wordplay. Two “I” are overlapped on a “U” and the two typefaces together create a smile; the phonetic expression is /I's on u/ which translates into the phrase "Eyes on You," emphasizing the constant presence of the technology's "gaze" on the user.
 
 ![](./Assets/readme/naming.png)
 
-
 #### COLLAGE
+
 The website uses audio-visual contents and this is the reason why we chose to combine flat shapes with the use of digital collage.
 
 ![](./Assets/readme/collage.gif)
-
 
 #### COLORS
 
 Each one of the six emotions that we detect (happiness, sadness, disgust, indifference, surprise, anger), has been associated with a specific color and shape, based on the linked psychological effects.
 
-![](./Assets/readme/shapes.png) 
-
+![](./Assets/readme/shapes.png)
 
 ## **CONTENTS**
 
 #### VIDEO
+
 Once we have defined the concept, a crucial first step has been to select all the video-contents based on quantities, quality and variety of emotions that could have been provoked with them. Their effectiveness has been proved through tests. Afterwards we deleted the contents which weren’t successful during our tests because they haven’t provoked any emotion or reaction into the user. On the other end, thanks to out tests, we discovered that the same content could provoke different reactions based on the user. Some emotions turned out to be too hard to provoke, for this reason we decided to not track the fear.
 
 #### SENTENCES
-We thought and wrote six different sentences for each content in order to cross each possible reaction felt by the user with a specific comment which is shown in the output. As mentioned above, this strategy emphasizes the humanization of the machine and the surprise of the user.
 
+We thought and wrote six different sentences for each content in order to cross each possible reaction felt by the user with a specific comment which is shown in the output. As mentioned above, this strategy emphasizes the humanization of the machine and the surprise of the user.
 
 ## **CODE**
 
@@ -160,40 +157,173 @@ We thought and wrote six different sentences for each content in order to cross 
 
 Face-api.js has been implemented for face and facial expression recognition. This library can detect 7 different expressions: happiness, sadness, anger, disgust, surprise, fear and neutrality.
 
-//////mettere codice
-
 es.
+
 ```JavaScript
-class Organic {
-  constructor(id, radius, pos, roughness, angle, color) {
-  this.id = id;
-  this.radius = radius; //radius of blob
-  this.pos = pos;
-  this.roughness = roughness; //magnitude of distortion
-  this.angle = angle; //angle of rotation
-  this.color = color; //color of the blob
-  this.xSpeed = 1;
-  this.ySpeed = 1;
+// setup
+faceOptions = {
+  withLandmarks: true,
+  withExpressions: true,
+  withDescriptors: false,
+  minConfidence: 0.3,
+};
+
+faceapi = ml5.faceApi(webcam, faceOptions, faceReady);
+
+facerec = createGraphics(width, height);
+// we have used graphics in order to record the face of the user without showing it.
+
+// external function
+function gotFace(error, result) {
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  detection = result;
+  faceapi.detect(gotFace);
 }
 ```
 
-+
+We first used face-api to create the first page of the site, where we can see a "face swap" in which our face is substituted for the face of the video. Basically we have recognized our face, recorded with the get() method and superimposed on the face of the video recognized with face-api.
 
-+
+code snippet:
 
-+
+```JavaScript
+facerec.image(webcam, 0, 0, width, height);
+if (detection.length > 0) {
+  let x1 = detection[0].detection._box._x;
+  let y1 = detection[0].detection._box._y;
+
+  let x2 = detection[0].detection._box._width;
+  let y2 = detection[0].detection._box._height;
+
+  yourFace = facerec.get(x1, y1, x2, y2);
+}
+
+image(video, 0, 0, vid.width, vid.height);
+
+if (facevid.length > 0) {
+  let xvid1 = facevid[0].detection._box._x;
+  let yvid1 = facevid[0].detection._box._y;
+
+  let xvid2 = facevid[0].detection._box._width;
+  let yvid2 = facevid[0].detection._box._height;
+
+  image(yourFace, xvid1, yvid1, xvid2, yvid2);
+}
+```
+
+As mentioned earlier, the face-api library can detect emotions, and we detected them in order to convey our message; the problem was that we had to choose only the most present or best emotion shown by the user, so we wrote code that continuously selects the user's face and evaluates his emotion and stores it in a variable.
+
+code snippet:
+
+```JavaScript
+let x1 = detection[0].detection._box._x - width / 10;
+let y1 = detection[0].detection._box._y - height / 10;
+
+let x2 = detection[0].detection._box._width + width / 5;
+let y2 = detection[0].detection._box._height + height / 5;
+
+if (maxAngry[mode] < detection[0].expressions.angry) {
+  maxAngry[mode] = detection[0].expressions.angry;
+  faceAngry[mode] = facerec.get(x1, y1, x2, y2);
+}
+
+if (maxDisgusted[mode] < detection[0].expressions.disgusted) {
+  maxDisgusted[mode] = detection[0].expressions.disgusted;
+  faceDisgusted[mode] = facerec.get(x1, y1, x2, y2);
+}
+
+if (maxHappy[mode] < detection[0].expressions.happy) {
+  maxHappy[mode] = detection[0].expressions.happy;
+  faceHappy[mode] = facerec.get(x1, y1, x2, y2);
+}
+
+if (maxNeutral[mode] < detection[0].expressions.neutral) {
+  maxNeutral[mode] = detection[0].expressions.neutral;
+  faceNeutral[mode] = facerec.get(x1, y1, x2, y2);
+}
+
+if (maxSad[mode] < detection[0].expressions.sad) {
+  maxSad[mode] = detection[0].expressions.sad;
+  faceSad[mode] = facerec.get(x1, y1, x2, y2);
+}
+
+if (maxSurprised[mode] < detection[0].expressions.surprised) {
+  maxSurprised[mode] = detection[0].expressions.surprised;
+  faceSurprised[mode] = facerec.get(x1, y1, x2, y2);
+}
+```
+
+#### JSON DATABASE
+
+In order to streamline the code and to have the ability to always provide different responses based on the content shown and the resulting user reaction, we decided to create a JSON that contained all possible combinations.
+Specifically it was created as a Google Sheets sheet and then converted to csv and finally to JSON, below is an example of how it is composed and how it is called in the code.
+
+```JSON
+{
+  "titolo": "Disgusted Cat",
+  "happiness": "Do not think that your feet taste/smell good",
+  "anger": "You would never treat a friend in this way",
+  "sadness": "You would never treat a friend in this way",
+  "disgust": "Have you ever considered to use onlyfans?",
+  "surprise": "I know that secretely you like when someone smells your feet!",
+  "neutral": "Toc toc, is anybody there?"
+},
+```
+
+```JavaScript
+// preload
+data = loadJSON("possibilities.json");
+
+//draw
+text( data[vidrand[content]].sadness,width / 2 - height / 1.1 / 2, height / 2 - height / 1.1 / 2,height / 1.1, height / 1.1 );
+
+text( data[vidrand[content]].titolo + ": " + round(100 * percentage[content]) + "% " + emotion[content], width / 2, height / 12 );
+```
+
+#### P5 VIDEOS
+
+Originally p5 does not support the video tag, so in order to include them we had to find a way to insert them through the image() tag.
+So using the get() method on the video and refreshing the page through the draw loop the image change gives the illusion of watching a video.
+
+code snippet:
+
+```JavaScript
+// setup
+for (let i = 0; i < 5; i++) {
+  vidrand[i] = round(random(0, 27));
+  //this cycle is necessary to have all different content presented to the user without repetitions.
+
+  for (let j = 0; j < i; j++) {
+    while (vidrand[i] == vidrand[j] && i != j) {
+      vidrand[i] = round(random(0, 27));
+    }
+  }
+}
+
+for (let i = 0; i < 5; i++) {
+  contents[vidrand[i]] = createVideo([ "Assets/Contents/video" + vidrand[i] + ".mp4", ]);
+}
+
+// draw
+let img1 = contents[vidrand[0]].get();
+image(img1, windowWidth / 2, windowHeight / 2);
+```
 
 # REFERENCES
 
 https://www.youtube.com/watch?v=3yqANLRWGLo
-
-
+https://justadudewhohacks.github.io/face-api.js/docs/index.html
+https://ml5js.org/
+https://editor.p5js.org/Jaesar/sketches/gP_yqLk4J
 
 # TEAM
 
 ![](./Assets/readme/team.png)
 
-**Faculty** 
+**Faculty**
 
 [Creative Coding 2022/2023](https://drawwithcode.github.io/2020/)
 

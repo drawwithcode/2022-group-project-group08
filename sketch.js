@@ -252,7 +252,6 @@ function setup() {
     withLandmarks: true,
     withExpressions: true,
     withDescriptors: false,
-    withAgeAndGender: true,
     minConfidence: 0.3,
   };
 
