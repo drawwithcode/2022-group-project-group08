@@ -501,6 +501,17 @@ function draw() {
       imageMode(CORNER);
       rectMode(CORNER);
 
+      push();
+      translate(
+        width / 2 - vid.width / 2,
+        height / 2 - height / 10 - vid.height / 2
+      );
+      rotate(3);
+      noStroke();
+      fill(myColors[randCol[6]]);
+      rect(-10, -30, vid.width + 10, vid.height + 20);
+      pop();
+
       image(
         shapes[shapefpage[0]],
         width / 2 - width / 1.5 / 2,
@@ -540,12 +551,6 @@ function draw() {
         width / 2 - vid.width / 2,
         height / 2 - height / 10 - vid.height / 2
       );
-      push();
-      rotate(3);
-      noStroke();
-      fill(myColors[randCol[6]]);
-      rect(-10, -30, vid.width + 10, vid.height + 20);
-      pop();
       image(video, 0, 0, vid.width, vid.height);
 
       if (facevid.length > 0) {
@@ -629,7 +634,7 @@ function draw() {
         "of people start to see contents on the web barely awake. Among the huge amount of contents avaiable on the web...";
       push();
       fill(255);
-      translate(width / 7, height - height / 1.8);
+      translate(width / 7, height / 2);
       textFont(Graphik);
       textSize(40);
       text(t, 0, 0, width - width / 4, height);
@@ -1635,7 +1640,7 @@ function draw() {
         loading.height / 6
       );
       pop();
-      recth = 80;
+      recth = 90;
       break;
 
     case 4:
@@ -1654,7 +1659,7 @@ function draw() {
             flip = true;
           }
         } else {
-          if (recth < 80) {
+          if (recth < 90) {
             recth += flipvec;
           }
         }
@@ -1665,7 +1670,7 @@ function draw() {
             flip = false;
           }
         } else {
-          if (recth < 80) {
+          if (recth < 90) {
             recth += flipvec;
           }
         }
@@ -1703,7 +1708,7 @@ function draw() {
       pop();
 
       let txt2 =
-        "Maybe you and your friends can’t, but technology is able to understand you literally every second. I showed you different contents to see how you would have reacted to them, as an unknown person you just met who tries to start a conversation using different topics. I am always present as your reactions are, let me show you...";
+        "Maybe you and your friends can't, but technology is able to understand you literally every second. I showed you different contents to see how you would have reacted to them, as an unknown person you just met who tries to start a conversation using different topics. I am always present as your reactions are, let me show you...";
       push();
       fill(255);
       translate(width / 7, height - height / 3);
@@ -1929,48 +1934,48 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 image(
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 image(
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 image(
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 image(
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 image(
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
               image(
@@ -2029,8 +2034,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 for (let i = 0; i < 20; i++) {
@@ -2047,8 +2052,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 for (let i = 0; i < 20; i++) {
@@ -2065,8 +2070,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 for (let i = 0; i < 20; i++) {
@@ -2083,8 +2088,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 for (let i = 0; i < 20; i++) {
@@ -2101,8 +2106,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 for (let i = 0; i < 20; i++) {
@@ -2119,8 +2124,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
 
@@ -2174,8 +2179,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2200,8 +2205,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -2226,8 +2231,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2252,8 +2257,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2278,8 +2283,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2304,8 +2309,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2361,8 +2366,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2398,8 +2403,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -2434,8 +2439,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2471,8 +2476,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2508,8 +2513,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2545,8 +2550,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2602,48 +2607,48 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 image(
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 image(
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 image(
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 image(
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 image(
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
               image(
@@ -2702,8 +2707,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 for (let i = 0; i < 20; i++) {
@@ -2720,8 +2725,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 for (let i = 0; i < 20; i++) {
@@ -2738,8 +2743,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 for (let i = 0; i < 20; i++) {
@@ -2756,8 +2761,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 for (let i = 0; i < 20; i++) {
@@ -2774,8 +2779,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 for (let i = 0; i < 20; i++) {
@@ -2792,8 +2797,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
 
@@ -2847,8 +2852,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2873,8 +2878,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -2899,8 +2904,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2925,8 +2930,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -2951,8 +2956,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -2977,8 +2982,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3034,8 +3039,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3071,8 +3076,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -3107,8 +3112,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3144,8 +3149,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3181,8 +3186,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3218,8 +3223,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3275,48 +3280,48 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 image(
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 image(
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 image(
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 image(
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 image(
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
               image(
@@ -3375,8 +3380,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 for (let i = 0; i < 20; i++) {
@@ -3393,8 +3398,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 for (let i = 0; i < 20; i++) {
@@ -3411,8 +3416,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 for (let i = 0; i < 20; i++) {
@@ -3429,8 +3434,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 for (let i = 0; i < 20; i++) {
@@ -3447,8 +3452,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 for (let i = 0; i < 20; i++) {
@@ -3465,8 +3470,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
 
@@ -3520,8 +3525,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3546,8 +3551,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -3572,8 +3577,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3598,8 +3603,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3624,8 +3629,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3650,8 +3655,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3707,8 +3712,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3744,8 +3749,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -3780,8 +3785,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3817,8 +3822,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -3854,8 +3859,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3891,8 +3896,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -3948,48 +3953,48 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 image(
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 image(
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 image(
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 image(
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 image(
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
               image(
@@ -4048,8 +4053,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 for (let i = 0; i < 20; i++) {
@@ -4066,8 +4071,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 for (let i = 0; i < 20; i++) {
@@ -4084,8 +4089,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 for (let i = 0; i < 20; i++) {
@@ -4102,8 +4107,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 for (let i = 0; i < 20; i++) {
@@ -4120,8 +4125,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 for (let i = 0; i < 20; i++) {
@@ -4138,8 +4143,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
 
@@ -4193,8 +4198,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4219,8 +4224,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -4245,8 +4250,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4271,8 +4276,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4297,8 +4302,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4323,8 +4328,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4380,8 +4385,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4417,8 +4422,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -4453,8 +4458,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4490,8 +4495,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4527,8 +4532,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4564,8 +4569,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4621,48 +4626,48 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 image(
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 image(
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 image(
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 image(
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 image(
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
               image(
@@ -4721,8 +4726,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "disgusted") {
                 for (let i = 0; i < 20; i++) {
@@ -4739,8 +4744,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
               } else if (emotion[content] == "happy") {
                 for (let i = 0; i < 20; i++) {
@@ -4757,8 +4762,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "sad") {
                 for (let i = 0; i < 20; i++) {
@@ -4775,8 +4780,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
               } else if (emotion[content] == "surprised") {
                 for (let i = 0; i < 20; i++) {
@@ -4793,8 +4798,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               } else if (emotion[content] == "neutral") {
                 for (let i = 0; i < 20; i++) {
@@ -4811,8 +4816,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
               }
 
@@ -4866,8 +4871,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4892,8 +4897,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -4918,8 +4923,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4944,8 +4949,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -4970,8 +4975,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -4996,8 +5001,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -5039,8 +5044,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -5076,8 +5081,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 text(
@@ -5112,8 +5117,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -5149,8 +5154,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 text(
@@ -5186,8 +5191,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -5223,8 +5228,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 text(
@@ -5331,7 +5336,7 @@ function draw() {
               );
 
               textFont(Akira);
-              textSize(100);
+              textSize(200);
               text(
                 "Because i was",
                 width / 2 - height / 1.1 / 2,
@@ -5370,8 +5375,8 @@ function draw() {
                   angerShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 push();
@@ -5399,8 +5404,8 @@ function draw() {
                   disgustShape,
                   width / 2,
                   height / 2,
-                  height / 1.4,
-                  height / 1.4
+                  height / 1.6,
+                  height / 1.6
                 );
 
                 push();
@@ -5428,8 +5433,8 @@ function draw() {
                   happyShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 push();
@@ -5457,8 +5462,8 @@ function draw() {
                   sadShape,
                   width / 2,
                   height / 2,
-                  height / 1.2,
-                  height / 1.2
+                  height / 1.4,
+                  height / 1.4
                 );
 
                 push();
@@ -5486,8 +5491,8 @@ function draw() {
                   surpriseShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 push();
@@ -5515,8 +5520,8 @@ function draw() {
                   neutralShape,
                   width / 2,
                   height / 2,
-                  height / 1.1,
-                  height / 1.1
+                  height / 1.3,
+                  height / 1.3
                 );
 
                 push();
@@ -5565,7 +5570,7 @@ function draw() {
 
       push();
       rectMode(CENTER);
-      translate(windowWidth / 2, windowHeight / 2 - 100);
+      translate(windowWidth / 2, windowHeight / 2 - 250);
 
       angleMode(DEGREES);
       rotate(-2);
@@ -5621,7 +5626,7 @@ function draw() {
       fill("#b054df");
       rect(
         windowWidth / 2 + 370,
-        windowHeight / 2 + 200,
+        windowHeight / 2 + 210,
         windowWidth / 7,
         windowHeight / 10
       );
@@ -6107,11 +6112,11 @@ function draw() {
       textSize(100);
       textAlign(CENTER);
       textFont("Akira");
-      text("3", width / 2, height / 2 - 130);
-      text("2", width / 2 - height / 3.5 - 30, height / 2 - 130);
-      text("1", width / 2 - height / 1.75 - 60, height / 2 - 130);
-      text("4", width / 2 + height / 3.5 + 30, height / 2 - 130);
-      text("5", width / 2 + height / 1.75 + 60, height / 2 - 130);
+      text("3", width / 2, height / 2 - 150);
+      text("2", width / 2 - height / 3.5 - 30, height / 2 - 150);
+      text("1", width / 2 - height / 1.75 - 60, height / 2 - 150);
+      text("4", width / 2 + height / 3.5 + 30, height / 2 - 150);
+      text("5", width / 2 + height / 1.75 + 60, height / 2 - 150);
       pop();
       break;
 
@@ -6270,6 +6275,7 @@ function draw() {
       );
 
       push();
+      textFont(Akira);
       translate(-height / 8 - 10, -height / 8 - 10);
       textAlign(LEFT, TOP);
       text(
@@ -6300,7 +6306,7 @@ function draw() {
       text(
         round(100 * maxSurprised[selectedcontent]) + "%",
         width / 2 - width / 4,
-        height / 2 - 30
+        height / 2 + height / 4 + 50
       );
       pop();
       break;
