@@ -29,7 +29,8 @@ canvas {
 }
 
 #p5_loading {
-  background-image: url("assets/Graphics/loading.gif");
+  background-image: url("./assets/Graphics/loading.gif");
+
   background-color: #1e1e1e;
   background-repeat: repeat;
   width: 100%;
