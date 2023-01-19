@@ -1,4 +1,4 @@
-![](./assets/readme/logo.png)
+![](./Assets/readme/logo.png)
 
 # ABOUT
 I’S ON U is a web experience built on p5.js with the aim of showing the users the intangible presence of two spheres, the technological and the human one. I’S ON U is a group project designed for the Creative Coding course at Politecnico di Milano.
@@ -36,7 +36,7 @@ I’S ON U is a web experience built on p5.js with the aim of showing the users 
 
 # 5. [TEAM](#team)
 
-![](./assets/readme/emoji.gif)
+![](./Assets/readme/emoji.gif)
 
 # PROJECT
 
@@ -58,7 +58,7 @@ The website has been designed to be used by only one user at the time. In order 
 
 Because of how the website has been designed, it doesn’t require any particular attention for the setup itself; it can be used both in exhibitions and in informal settings. Only one user at the time can interact and use the website, but we want to underline the fact that the external presence of someone else, while a user is trying the experience, may affect the way he or she reacts to the contents that we are showing him/her. Indeed, from the tests conducted, when the user is with someone else enhances his/hers emotions and reactions by interacting also with the other person and not just with the machine.
 
-![](./assets/readme/test.gif)
+![](./Assets/readme/test.gif)
 
 ## **DEVICE**
 In order to use our website it is necessary to have a monitor with a webcam, a speaker and a touchpad or a mouse in order to allow the user to skip the pages whenever it is required.
@@ -73,7 +73,7 @@ The website has been designed with the intent of being a true experience where t
 
 The Homepage is the first screen the user faces. It has been designed in a way that the user can’t really understand what the theme of the website is. The whole experience starts when the user clicks on the “Start” button.
 
-![](./assets/readme/home.png)
+![](./Assets/readme/home.png)
 
 ### THIS IS YOU
 
@@ -81,35 +81,35 @@ The screen following the Homepage shows a video where a person is using his smar
 
 The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.  
 
-![](./assets/readme/intro.png)
+![](./Assets/readme/intro.png)
 
-![](./assets/readme/70.png)
+![](./Assets/readme/70.png)
 
 ### CONTENTS
 
 The experience goes on with the vision of five visual-audio contents, one after another, that have been chosen randomly among all the ones we have selected. While the user is watching the contents, we don’t give the option of switching from one to the other: once one of them is ended, the other one starts automatically and so on. This is because our goal is to prevent the user from skipping content, so that we can record his/her complete reactions to each video and present them back to him/her at the end in the form of output.  
 
-![](./assets/readme/video.png)
+![](./Assets/readme/video.png)
 
 ### EXPLANATION PAGE
 
 Once the user has watched the five visual-audio contents, another screen appears. The purpose of this page is to make the user aware of the fact that during the experience he/she just had there have constantly been two different presences of whom he/she was unaware of. The first one is the presence of technology because, allowing the access of the webcam, the user allowed the machine to record him/her; the second one is the presence of the user himself/herself, in the sense that he/she showed emotions and reactions unconsciously produced as an answer to the contents he/she was watching. This page is also the connection ring between the first part of the website and the one that follows.
 
-![](./assets/readme/i'sonyou.png)
+![](./Assets/readme/i'sonyou.png)
 
 ### OUTPUT - REACTION
 
 Once the user has become aware of the fact that his/her reactions and emotions have been recorded through the whole experience until now, we want to show him/her what it has been effectively recorded. The user can see, for each content, the prevalent emotion that has been elicited; he/she can do it thanks to a path built on four screens. First, the user is shown what content is being considered, in order to create a direct connection between the emotion that has been felt and the content watched. Then the prevalent emotion is shown as a percentage. The following screen shows a sentence that links the user’s reaction and the audio-visual content. The purpose is to emphasize the presence of technology by humanizing it, and this detail is even more highlighted by the fact that all sentences refer directly to the user. As the last thing we want to show the user himself/herself through a picture that portrays him/her in the moment where the prevalent emotion felt was at its peak.
 To summarize, the aim of the output with this structure is to reveal step by step the intangible presence of technology and of oneself, by allowing the user to visualize his/her reaction. 
 
-![](./assets/readme/output.png)
+![](./Assets/readme/output.png)
 
 
 ### OUTPUT 2 - REACTION'S REACTION
 
 Our goal by showing the reaction of the reaction is to reaffirm the idea of the intangible and constant presence of technology and of ourselves, even when the experience seems to be ended. This revelation happens gradually too, through the succession of three different screens.
 
-![](./assets/readme/output2.png)
+![](./Assets/readme/output2.png)
 
 
 ### ABOUT | RECAP
@@ -118,7 +118,7 @@ The last screen of the website shows two different options: the user can either 
 
 The recap consists of a series of screens where we show the user in what percentage each emotion (happiness, sadness, disgust, indifference, surprise, anger), that was recorded, was experienced during the enjoyment of each content. 
 
-![](./assets/readme/aboutrecap.png)
+![](./Assets/readme/aboutrecap.png)
 
 
 # CHALLENGES
@@ -129,20 +129,20 @@ The recap consists of a series of screens where we show the user in what percent
 #### NAMING
 Consistent with the theme of emotions, we designed typographic stickers that outline the visual appearance and tone of voice of the website. The logo itself, created using typefaces, helps to understand the naming through a wordplay. Two “I” are overlapped on a “U” and the two typefaces together create a smile; the phonetic expression is /I's on u/ which translates into the phrase "Eyes on You," emphasizing the constant presence of the technology's "gaze" on the user. 
 
-![](./assets/readme/naming.png)
+![](./Assets/readme/naming.png)
 
 
 #### COLLAGE
 The website uses audio-visual contents and this is the reason why we chose to combine flat shapes with the use of digital collage.
 
-![](./assets/readme/collage.gif)
+![](./Assets/readme/collage.gif)
 
 
 #### COLORS
 
 Each one of the six emotions that we detect (happiness, sadness, disgust, indifference, surprise, anger), has been associated with a specific color and shape, based on the linked psychological effects.
 
-![](./assets/readme/shapes.png) 
+![](./Assets/readme/shapes.png) 
 
 
 ## **CONTENTS**
@@ -191,7 +191,7 @@ https://www.youtube.com/watch?v=3yqANLRWGLo
 
 # TEAM
 
-![](./assets/readme/team.png)
+![](./Assets/readme/team.png)
 
 **Faculty** 
 
