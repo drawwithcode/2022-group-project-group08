@@ -236,7 +236,6 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //const canvas.getContext("2d", { willReadFrequently: true });
   logo = select("#logo");
   alert(
     "Hey, to better enjoy this site we suggest to be alone in a quiet place with your sound on, Have fun!"
