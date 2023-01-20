@@ -286,7 +286,7 @@ Specifically it was created as a Google Sheets sheet and then converted to csv a
 // preload
 data = loadJSON("possibilities.json");
 
-//draw
+// draw
 text( data[vidrand[content]].sadness,width / 2 - height / 1.1 / 2, height / 2 - height / 1.1 / 2,height / 1.1, height / 1.1 );
 
 text( data[vidrand[content]].titolo + ": " + round(100 * percentage[content]) + "% " + emotion[content], width / 2, height / 12 );
