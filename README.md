@@ -60,7 +60,11 @@ The website has been designed to be used by only one user at the time. In order 
 
 Because of how the website has been designed, it doesn’t require any particular attention for the setup itself; it can be used both in exhibitions and in informal settings. Only one user at the time can interact and use the website, but we want to underline the fact that the external presence of someone else, while a user is trying the experience, may affect the way he or she reacts to the contents that we are showing him/her. Indeed, from the tests conducted, when the user is with someone else enhances his/hers emotions and reactions by interacting also with the other person and not just with the machine.
 
-![](./Assets/readme/test.gif)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/test.gif">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/testw.gif">
+  <img src="">
+</picture>
 
 ## **DEVICE**
 
@@ -74,59 +78,127 @@ The website has been designed with the intent of being a true experience where t
 
 The Homepage is the first screen the user faces. It has been designed in a way that the user can’t really understand what the theme of the website is. The whole experience starts when the user clicks on the “Start” button.
 
-![](./Assets/readme/home.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/home.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/homew.png">
+  <img src="">
+</picture>
 
 ### THIS IS YOU
 
 The screen following the Homepage shows a video where a person is using his smartphone and the face of the user, who is interacting with the website, is overlaid on the top of the face of the person in the video. The purpose of this detail is since in this way we make the user believes that he/she allowed to the camera being turned on just to appear in this screen instead of the guy in the video. In this way we are able to record the user’s emotions and reactions during the whole experience, without him/her knowing the real reason why it was necessary for him/her to consent.
 
-![](./Assets/readme/intro.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/intro.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/introw.png">
+  <img src="">
+</picture>
 
 The storytelling continues in the next screen, which was begun with the video of the guy watching his smartphone; but this page works also as a contrivance to justify the fact that we are going to show the user a variety of contents, one after another.
 
-![](./Assets/readme/70.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/70.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/70w.png">
+  <img src="">
+</picture>
 
 ### CONTENTS
 
 The experience goes on with the vision of five visual-audio contents, one after another, that have been chosen randomly among all the ones we have selected. While the user is watching the contents, we don’t give the option of switching from one to the other: once one of them is ended, the other one starts automatically and so on. This is because our goal is to prevent the user from skipping content, so that we can record his/her complete reactions to each video and present them back to him/her at the end in the form of output.
 
-![](./Assets/readme/video.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/video.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/videow.png">
+  <img src="">
+</picture>
+
 
 ### EXPLANATION PAGE
 
 Once the user has watched the five visual-audio contents, another screen appears. The purpose of this page is to make the user aware of the fact that during the experience he/she just had there have constantly been two different presences of whom he/she was unaware of. The first one is the presence of technology because, allowing the access of the webcam, the user allowed the machine to record him/her; the second one is the presence of the user himself/herself, in the sense that he/she showed emotions and reactions unconsciously produced as an answer to the contents he/she was watching. This page is also the connection ring between the first part of the website and the one that follows.
 
-![](./Assets/readme/i'sonyou.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/i'sonyou.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/i'sonyouw.png">
+  <img src="">
+</picture>
 
 ### OUTPUT - REACTION
 
 Once the user has become aware of the fact that his/her reactions and emotions have been recorded through the whole experience until now, we want to show him/her what it has been effectively recorded. The user can see, for each content, the prevalent emotion that has been elicited; he/she can do it thanks to a path built on four screens. First, the user is shown what content is being considered, in order to create a direct connection between the emotion that has been felt and the content watched. Then the prevalent emotion is shown as a percentage. The following screen shows a sentence that links the user’s reaction and the audio-visual content. The purpose is to emphasize the presence of technology by humanizing it, and this detail is even more highlighted by the fact that all sentences refer directly to the user. As the last thing we want to show the user himself/herself through a picture that portrays him/her in the moment where the prevalent emotion felt was at its peak.
 To summarize, the aim of the output with this structure is to reveal step by step the intangible presence of technology and of oneself, by allowing the user to visualize his/her reaction.
 
-![](./Assets/readme/output.png)
-![](./Assets/readme/outputA.png)
-![](./Assets/readme/outputB.png)
-![](./Assets/readme/outputC.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/output.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/outputw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/outputA.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/outputAw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/outputB.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/outputBw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/outputC.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/outputCw.png">
+  <img src="">
+</picture>
+
 
 ### OUTPUT 2 - REACTION'S REACTION
 
 Our goal by showing the reaction of the reaction is to reaffirm the idea of the intangible and constant presence of technology and of ourselves, even when the experience seems to be ended. This revelation happens gradually too, through the succession of three different screens.
 
-![](./Assets/readme/output2A.png)
-![](./Assets/readme/output2B.png)
-![](./Assets/readme/output2C.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/output2A.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/output2Aw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/output2B.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/output2Bw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/output2C.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/output2Cw.png">
+  <img src="">
+</picture>
+
 
 ### ABOUT | RECAP
 
 The last screen of the website shows two different options: the user can either explore more the project by clicking on the “About” button where he/she can see who has developed the website and why or the user can deepen more the experience that has just been lived by clicking on the “Recap” button.
 
-![](./Assets/readme/aboutrecap.png)
-![](./Assets/readme/about.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/aboutrecap.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/aboutrecapw.png">
+  <img src="">
+</picture>
 
 The recap consists of a series of screens where we show the user in what percentage each emotion (happiness, sadness, disgust, indifference, surprise, anger), that was recorded, was experienced during the enjoyment of each content.
 
-![](./Assets/readme/recap.png)
-![](./Assets/readme/recapA.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/recap.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/recapw.png">
+  <img src="">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/recapA.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/recapAw.png">
+  <img src="">
+</picture>
 
 # CHALLENGES
 
@@ -148,7 +220,11 @@ The website uses audio-visual contents and this is the reason why we chose to co
 
 Each one of the six emotions that we detect (happiness, sadness, disgust, indifference, surprise, anger), has been associated with a specific color and shape, based on the linked psychological effects.
 
-![](./Assets/readme/shapes.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/shapes.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/shapesw.png">
+  <img src="">
+</picture>
 
 ## **CONTENTS**
 
@@ -286,7 +362,7 @@ Specifically it was created as a Google Sheets sheet and then converted to csv a
 // preload
 data = loadJSON("possibilities.json");
 
-// draw
+//draw
 text( data[vidrand[content]].sadness,width / 2 - height / 1.1 / 2, height / 2 - height / 1.1 / 2,height / 1.1, height / 1.1 );
 
 text( data[vidrand[content]].titolo + ": " + round(100 * percentage[content]) + "% " + emotion[content], width / 2, height / 12 );
@@ -333,7 +409,11 @@ https://editor.p5js.org/Jaesar/sketches/gP_yqLk4J
 
 # TEAM
 
-![](./Assets/readme/team.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/team.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/teamw.png">
+  <img src="">
+</picture>
 
 **Faculty**
 
