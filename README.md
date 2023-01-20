@@ -1,4 +1,8 @@
-![](./Assets/readme/logo.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/logow.png">
+  <img src="">
+</picture>
 
 # ABOUT
 
@@ -208,7 +212,11 @@ The recap consists of a series of screens where we show the user in what percent
 
 Consistent with the theme of emotions, we designed typographic stickers that outline the visual appearance and tone of voice of the website. The logo itself, created using typefaces, helps to understand the naming through a wordplay. Two “I” are overlapped on a “U” and the two typefaces together create a smile; the phonetic expression is /I's on u/ which translates into the phrase "Eyes on You," emphasizing the constant presence of the technology's "gaze" on the user.
 
-![](./Assets/readme/naming.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./Assets/readme/naming.png">
+  <source media="(prefers-color-scheme: light)" srcset="./Assets/readme/namingw.png">
+  <img src="">
+</picture>
 
 #### COLLAGE
 
