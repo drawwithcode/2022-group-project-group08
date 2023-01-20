@@ -6157,7 +6157,7 @@ function draw() {
       text("RECAP", 0, -height / 3.3);
       fill("#ffffff");
       rotate(-2);
-      text(data[vidrand[0]].titolo, 0, -height / 4.6);
+      text(data[vidrand[selectedcontent]].titolo, 0, -height / 4.6);
 
       pop();
 
